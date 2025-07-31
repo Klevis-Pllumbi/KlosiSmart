@@ -31,9 +31,9 @@ services:
     ports:
       - "3000:80"
     depends_on:
-      - klosismart
-    networks:
       - backend
+    networks:
+      - klosi_net
 
 volumes:
   db_data:
