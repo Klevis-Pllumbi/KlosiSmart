@@ -1,20 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import api from './api/axios';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import LoginPage from './components/Auth/LoginPage';
+import RegisterPage from './components/Auth/RegisterPage';
+import AdminDashboard from './components/AdminDashboard';
+import UserDashboard from './components/UserDashboard';
+import PrivateRoute from './routes/PrivateRoute';
+import RoleBasedRoute from './routes/RoleBasedRoute';
 
 function App() {
-  const [message, setMessage] = useState('');
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
 
-  useEffect(() => {
-    api.get('/test')
-        .then(response => setMessage(response.data))
-        .catch(error => console.error("Error:", error));
-  }, []);
+                    <Route
+                        path="/admin/dashboard"
+                        element={
+                            <RoleBasedRoute allowedRole="ROLE_ADMIN">
+                                <AdminDashboard />
+                            </RoleBasedRoute>
+                        }
+                    />
 
-  return (
-      <div>
-        <h1>{message || "Loading..."}</h1>
-      </div>
-  );
+                    <Route
+                        path="/user/dashboard"
+                        element={
+                            <RoleBasedRoute allowedRole="ROLE_USER">
+                                <UserDashboard />
+                            </RoleBasedRoute>
+                        }
+                    />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+    );
 }
 
 export default App;

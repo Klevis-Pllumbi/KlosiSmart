@@ -34,7 +34,7 @@ public class AuthService {
 
         String jwtToken = jwtService.generateToken(user);
 
-        return new AuthResponse("Regjistrimi u krye me sukses", jwtToken);
+        return new AuthResponse("Regjistrimi u krye me sukses", user.getRole().getAuthority(), jwtToken);
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -47,6 +47,6 @@ public class AuthService {
 
         String jwtToken = jwtService.generateToken(user);
 
-        return new AuthResponse("Login i suksesshëm", jwtToken);
+        return new AuthResponse("Login i suksesshëm", user.getRole().getAuthority(), jwtToken);
     }
 }
