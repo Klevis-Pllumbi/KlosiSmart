@@ -5,6 +5,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.NonNull;
@@ -42,16 +43,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        final String authHeader = request.getHeader("Authorization");
-        System.out.println("Authorization Header: " + authHeader);
-        final String jwt;
-        final String userEmail;
+        String jwt = null;
+        String userEmail = null;
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new InsufficientAuthenticationException("Autorizimi mungon ose është i pasaktë");
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("jwt".equals(cookie.getName())) {
+                    jwt = cookie.getValue();
+                }
+            }
         }
 
-        jwt = authHeader.substring(7);
+        if (jwt == null) {
+            request.setAttribute("exception", new InsufficientAuthenticationException("Autorizimi mungon ose është i pasaktë"));
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try {
             userEmail = jwtService.extractUsername(jwt);
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException ex) {
@@ -80,6 +88,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }
