@@ -18,6 +18,7 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> profile(@AuthenticationPrincipal User user) {
         Map<String, Object> res = new HashMap<>();
         res.put("email", user.getEmail());
+        res.put("fullName", user.getName() + " " + user.getSurname());
         res.put("role", user.getRole().getAuthority());
         return ResponseEntity.ok(res);
     }

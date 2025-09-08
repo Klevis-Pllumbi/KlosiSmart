@@ -14,9 +14,9 @@ export default function News() {
                 <div className="auto-container">
                     <div className="sec-title text-center">
                         <div className="sub-title">
-                            <h6>City News</h6>
+                            <h6>LAJME</h6>
                         </div>
-                        <h2>Know More About The City by <br /> Govarnex Media</h2>
+                        <h2>Njihuni me lajmet më të fundit nga <br /> media jonë</h2>
                     </div>
                     <div className="row">
                         {/*Start Blog Style1 Single */}

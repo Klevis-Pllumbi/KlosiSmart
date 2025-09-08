@@ -13,9 +13,10 @@ const ProtectedRoute = ({ children, role }) => {
             if (!user) {
                 const currentPath = window.location.pathname + window.location.search;
                 router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
-            } else if (role && user.role !== role) {
-                router.push("/unauthorized");
             }
+            // else if (role && user.role !== role) {
+            //     router.push("/unauthorized");
+            // }
         }
     }, [user, loadingUser, role, router]);
 

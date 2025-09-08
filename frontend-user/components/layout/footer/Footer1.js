@@ -18,13 +18,12 @@ export default function Footer1() {
                                     <div className="our-company-info">
                                         <div className="footer-logo-style1">
                                             <Link href="/">
-                                                <img src="assets/images/footer/footer-logo-1.png" alt="Awesome Logo"
+                                                <img src="assets/images/footer/logo.png" alt="Awesome Logo"
                                                     title="" />
                                             </Link>
                                         </div>
                                         <div className="our-company-info__text">
-                                            <p>Tincidunt neque pretium lectus donec risus. Mauris mi tempor nunc orc leo
-                                                consequat vitae erat gravida lobortis nec et sagittis.</p>
+                                            <p>Një hap drejt një komuniteti më të lidhur, ku informacioni dhe bashkëpunimi janë gjithmonë në dorën tuaj.</p>
                                         </div>
                                         <ul className="our-company-info__social-link">
                                             <li>
@@ -47,15 +46,13 @@ export default function Footer1() {
                             <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 wow animated fadeInUp" data-wow-delay="0.3s">
                                 <div className="single-footer-widget single-footer-widget--explore">
                                     <div className="title">
-                                        <h3>Explore</h3>
+                                        <h3>Eksploro</h3>
                                     </div>
                                     <div className="footer-widget-links">
                                         <ul>
-                                            <li><Link href="#">Employment & Jobs</Link></li>
-                                            <li><Link href="#">Government & Elections</Link></li>
-                                            <li><Link href="#">Real Estate & Buildings</Link></li>
-                                            <li><Link href="#">Health & Medical</Link></li>
-                                            <li><Link href="#">Trasport & Traffic</Link></li>
+                                            <li><Link href="#">Turizmi</Link></li>
+                                            <li><Link href="#">Eventet</Link></li>
+                                            <li><Link href="#">Lajmet</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -67,15 +64,13 @@ export default function Footer1() {
                             <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 wow animated fadeInUp" data-wow-delay="0.5s">
                                 <div className="single-footer-widget single-footer-widget--links">
                                     <div className="title">
-                                        <h3>Usefull Links</h3>
+                                        <h3>Veprime të shpejta</h3>
                                     </div>
                                     <div className="footer-widget-links">
                                         <ul>
-                                            <li><Link href="#">Administration</Link></li>
-                                            <li><Link href="#">Fire Services</Link></li>
-                                            <li><Link href="#">Business & Taxation</Link></li>
-                                            <li><Link href="#">Circular’s And Go’s</Link></li>
-                                            <li><Link href="#">Contact Us</Link></li>
+                                            <li><Link href="#">Jep opinion</Link></li>
+                                            <li><Link href="#">Raporto</Link></li>
+                                            <li><Link href="#">Bej një kërkesë</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -134,7 +129,7 @@ export default function Footer1() {
                     <div className="container">
                         <div className="bottom-inner text-center">
                             <div className="copyright">
-                                <p>Copyright 2024 by <Link href="#">govarnex</Link> All Right Reserved.</p>
+                                <p>© 2025 <Link href="#">KlosiSmart</Link> – Të gjitha të drejtat e rezervuara.</p>
                             </div>
                         </div>
                     </div>

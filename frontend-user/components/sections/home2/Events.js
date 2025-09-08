@@ -9,9 +9,11 @@ export default function Events() {
                 <div className="auto-container">
                     <div className="sec-title text-center">
                         <div className="sub-title">
-                            <h6>upcoming Events</h6>
+                            <h6>Evente</h6>
                         </div>
-                        <h2>Explore Upcoming City <br />Event Schedule</h2>
+                        <h2>Eksploroni eventet e ardhshme <br/>Katalogu i Eventeve</h2>
+                        <br />
+                        <Link href="/events" className="custom-link"><span className="icon-right-arrow"></span>Të gjitha eventet</Link>
                     </div>
                     <div className="row">
                         {/*Start Events Style2 Single */}
@@ -19,7 +21,7 @@ export default function Events() {
                             <div className="events-style2__single">
                                 <div className="events-style2__single-img">
                                     <div className="inner">
-                                        <img src="assets/images/resources/events-v2-img1.jpg" alt="#" />
+                                    <img src="assets/images/resources/events-v2-img1.jpg" alt="#" />
                                     </div>
                                     <div className="date-box">
                                         <p><span className="icon-calendar-1"></span>Apr 17, 2023</p>
@@ -143,6 +145,7 @@ export default function Events() {
                             </div>
                         </div>
                         {/*End Events Style2 Single */}
+
                     </div>
                 </div>
             </section>

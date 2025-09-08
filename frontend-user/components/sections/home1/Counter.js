@@ -16,9 +16,9 @@ export default function Counter() {
                         <div className="fact-counter-style1__title">
                             <div className="sec-title">
                                 <div className="sub-title">
-                                    <h6>Instant Services</h6>
+                                    <h6>Statistika</h6>
                                 </div>
-                                <h2>Large Scale of City <br/> Numbers</h2>
+                                <h2>Të dhënat mbi qytetin & banorët</h2>
                             </div>
                         </div>
                     </div>
@@ -31,10 +31,10 @@ export default function Counter() {
                                 {/*Start Fact Counter Style1 Counter Box Single */}
                                 <li className="fact-counter-style1__counter-box-single text-center">
                                     <div className="counter-box">
-                                        <h2><CounterUp end={4.2} /><span>M</span></h2>
+                                        <h2><CounterUp end={12.2} /><span>K</span></h2>
                                     </div>
                                     <div className="title">
-                                        <p>Total People Lived <br />in Our City</p>
+                                        <p>Banorë gjithsej <br />sipas INSTAT</p>
                                     </div>
                                 </li>
                                 {/*End Fact Counter Style1 Counter Box Single */}
@@ -42,10 +42,10 @@ export default function Counter() {
                                 {/*Start Fact Counter Style1 Counter Box Single */}
                                 <li className="fact-counter-style1__counter-box-single text-center">
                                     <div className="counter-box">
-                                        <h2><CounterUp end={7} /><span>Km2</span></h2>
+                                        <h2><CounterUp end={357.48} /><span>Km2</span></h2>
                                     </div>
                                     <div className="title">
-                                        <p>Square Kilometres <br /> Region Covers</p>
+                                        <p>Shtrirje <br/> gjeografike</p>
                                     </div>
                                 </li>
                                 {/*End Fact Counter Style1 Counter Box Single */}
@@ -53,10 +53,10 @@ export default function Counter() {
                                 {/*Start Fact Counter Style1 Counter Box Single */}
                                 <li className="fact-counter-style1__counter-box-single text-center">
                                     <div className="counter-box">
-                                        <h2><CounterUp end={3} /><span>rd</span></h2>
+                                        <h2><CounterUp end={4} /><span></span></h2>
                                     </div>
                                     <div className="title">
-                                        <p>Largesty City in our <br />Country</p>
+                                        <p>Njësi <br />Administrative</p>
                                     </div>
                                 </li>
                                 {/*End Fact Counter Style1 Counter Box Single */}

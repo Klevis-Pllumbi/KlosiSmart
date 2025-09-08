@@ -17,6 +17,16 @@ public class RegisterRequest {
     @NotBlank(message = "Emri është i detyrueshëm")
     private String name;
 
+    @NotBlank(message = "Mbiemri është i detyrueshëm")
+    private String surname;
+
+    @NotBlank(message = "NID është i detyrueshëm")
+    @Pattern(
+            regexp = "^[A-Z][0-9]{8}[A-Z]$",
+            message = "NID duhet të fillojë dhe të përfundojë me një shkronjë të madhe dhe të ketë 8 numra në mes"
+    )
+    private String nid;
+
     @Email(message = "Email i pasaktë")
     @NotBlank(message = "Email është i detyrueshëm")
     private String email;

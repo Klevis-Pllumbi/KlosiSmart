@@ -12,9 +12,9 @@ export default function Services() {
                 <div className="auto-container">
                     <div className="sec-title text-center">
                         <div className="sub-title">
-                            <h6>EFFICIENCY - OPPORTUNITY</h6>
+                            <h6>EFIÇENSË & GJITHËPËRFSHIRJE</h6>
                         </div>
-                        <h2>City Municipality Services <br />And Departments</h2>
+                        <h2>Shërbimet Online <br /> më të përdorura</h2>
                     </div>
                     <div className="row">
                         {/*Start Services Style1 Single */}
@@ -28,7 +28,7 @@ export default function Services() {
                                         <span className="icon-Group-5"></span>
                                     </div>
                                     <div className="services-style1__single-text">
-                                        <h3><Link href="/departments-details"> Government And <br /> Elections</Link></h3>
+                                        <h3><Link href="/departments-details"> Jepni Opinionin <br /> Tuaj</Link></h3>
                                         <div className="btn-box">
                                             <Link href="/departments-details"><span className="icon-right-arrow"></span></Link>
                                         </div>
@@ -46,10 +46,10 @@ export default function Services() {
                                 </div>
                                 <div className="services-style1__single-content text-center">
                                     <div className="services-style1__single-icon">
-                                        <span className="icon-Group-6"></span>
+                                        <span className="icon-comment"></span>
                                     </div>
                                     <div className="services-style1__single-text">
-                                        <h3><Link href="/departments-details"> Employment And <br /> Job Planning</Link></h3>
+                                        <h3><Link href="/departments-details"> Pyesni Asistentin <br /> Virtual</Link></h3>
                                         <div className="btn-box">
                                             <Link href="/departments-details"><span className="icon-right-arrow"></span></Link>
                                         </div>
@@ -67,10 +67,10 @@ export default function Services() {
                                 </div>
                                 <div className="services-style1__single-content text-center">
                                     <div className="services-style1__single-icon">
-                                        <span className="icon-Group-7"></span>
+                                        <span className="icon-mail"></span>
                                     </div>
                                     <div className="services-style1__single-text">
-                                        <h3><Link href="/departments-details"> Real Estate And <br /> Buildings</Link></h3>
+                                        <h3><Link href="/departments-details"> Raportoni Probleme & <br /> Shqetësime</Link></h3>
                                         <div className="btn-box">
                                             <Link href="/departments-details"><span className="icon-right-arrow"></span></Link>
                                         </div>

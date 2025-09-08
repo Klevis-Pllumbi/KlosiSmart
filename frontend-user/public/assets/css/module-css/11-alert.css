@@ -10,13 +10,17 @@
 
 .alert-box {
     position: relative;
-    width: 320px;
+    width: 330px;
     padding: 16px 20px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     backdrop-filter: blur(6px);
     font-family: sans-serif;
     overflow: hidden;
+}
+
+.alert-box p {
+    margin: 0;
 }
 
 .alert-title {

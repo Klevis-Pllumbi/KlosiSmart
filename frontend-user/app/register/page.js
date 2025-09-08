@@ -1,11 +1,21 @@
 'use client'
 import Link from "next/link"
 import AlertContainer from "@/components/elements/AlertContainer"
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import axios from "axios";
+import Preloader from "@/components/elements/Preloader";
 
 export default function RegisterPage() {
 
     const [alerts, setAlerts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [nid, setNid] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const addAlert = (type, title, description) => {
         const id = crypto.randomUUID();
@@ -17,20 +27,81 @@ export default function RegisterPage() {
 
     const removeAlert = (id) => {
         setAlerts((prev) => prev.filter((a) => a.id !== id));
-        console.log("removeAlert", id);
     };
 
-    useEffect(() => {
-        addAlert("error", "Error!", "Something went wrong...")
-        addAlert("success", "Error!", "Something went wrong...")
-        addAlert("warning", "Error!", "Something went wrong...")
-        addAlert("info", "", "Something went wrong...")
-    }, [])
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const validatePassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
+    const validateNid = (nid) => /^[A-Z]\d{8}[A-Z]$/.test(nid);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!firstName || !lastName || !nid || !email || !password || !confirmPassword) {
+            addAlert("error", "Fushë e zbrazët", "Ju lutemi plotësoni të gjitha fushat.");
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            addAlert("error", "Email jo i vlefshëm", "Ju lutemi shkruani një email të saktë.");
+            return;
+        }
+
+        if(!validatePassword(password)) {
+            addAlert("error", "Password jo i vlefshëm", "Password duhet te ketë min 8 karaktere, shkronja të mëdha, të vogla, numra dhe karaktere speciale");
+            return;
+        }
+
+        if(!validateNid(nid)) {
+            addAlert("error", "NID jo i vlefshëm", "NID fillon dhe përfundon me shkronjë të madhe, dhe ka 8 numra në mes");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            addAlert("error", "Gabim në password", "Fjalëkalimi dhe konfirmimi nuk përputhen.");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const res = await axios.post(
+                "http://localhost:8080/api/auth/register",
+                { name: firstName, surname: lastName, nid, email, password },
+                { withCredentials: true }
+            );
+
+            addAlert("success", "Regjistrim i suksesshëm", res.data.message || "Ju lutemi verifikoni email-in dhe .");
+
+            setFirstName("");
+            setLastName("");
+            setNid("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+        } catch (err) {
+            const data = err.response?.data;
+
+            if (Array.isArray(data)) {
+                data.forEach(msg => addAlert("error", "Gabim", msg));
+            } else if (Array.isArray(data?.errors)) {
+                data.errors.forEach(msg => addAlert("error", "Gabim", msg));
+            } else if (data?.message) {
+                addAlert("error", "Gabim", data.message);
+            } else if (data?.error) {
+                addAlert("error", "Gabim", data.error);
+            } else {
+                addAlert("error", "Gabim", "Ndodhi një gabim gjatë regjistrimit.");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <>
+            {loading && <Preloader />}
             <AlertContainer alerts={alerts} onClose={removeAlert} />
-            <section className="login-page services-style1">
+            <section className="login-page services-style1" style={{ height: "100vh", minHeight: "100vh" }}>
                 {/* Shapes */}
                 <div className="shape1"></div>
                 <div className="shape2 rotate-me">
@@ -50,7 +121,7 @@ export default function RegisterPage() {
                                     <h2>Krijoni Llogarinë tuaj</h2>
                                 </div>
 
-                                <form id="contact-form" className="default-form2" action="/api/register" method="post">
+                                <form id="contact-form" className="default-form2" onSubmit={handleSubmit}>
                                     {/* Emri & Mbiemri */}
                                     <div className="row">
                                         <div className="col-md-6">
@@ -60,7 +131,8 @@ export default function RegisterPage() {
                                                         type="text"
                                                         name="first_name"
                                                         placeholder="Emri"
-                                                        required
+                                                        value={firstName}
+                                                        onChange={(e) => setFirstName(e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -72,7 +144,8 @@ export default function RegisterPage() {
                                                         type="text"
                                                         name="last_name"
                                                         placeholder="Mbiemri"
-                                                        required
+                                                        value={lastName}
+                                                        onChange={(e) => setLastName(e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -88,7 +161,9 @@ export default function RegisterPage() {
                                                         type="text"
                                                         name="nid"
                                                         placeholder="Numri Personal (NID)"
-                                                        required
+                                                        value={nid}
+                                                        onChange={(e) => setNid(e.target.value)}
+                                                        
                                                     />
                                                 </div>
                                             </div>
@@ -100,7 +175,8 @@ export default function RegisterPage() {
                                                         type="email"
                                                         name="email"
                                                         placeholder="Email"
-                                                        required
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -116,7 +192,8 @@ export default function RegisterPage() {
                                                         type="password"
                                                         name="password"
                                                         placeholder="Fjalëkalimi"
-                                                        required
+                                                        value={password}
+                                                        onChange={(e) => setPassword(e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -128,7 +205,8 @@ export default function RegisterPage() {
                                                         type="password"
                                                         name="confirm_password"
                                                         placeholder="Konfirmo Fjalëkalimin"
-                                                        required
+                                                        value={confirmPassword}
+                                                        onChange={(e) => setConfirmPassword(e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -143,6 +221,7 @@ export default function RegisterPage() {
                                                     className="btn-one"
                                                     type="submit"
                                                     data-loading-text="Ju lutemi prisni..."
+                                                    disabled={loading}
                                                 >
                                                     <span className="txt">Regjistrohu</span>
                                                 </button>

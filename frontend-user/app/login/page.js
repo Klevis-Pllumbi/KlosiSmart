@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import AlertContainer from "@/components/elements/AlertContainer";
 import { useAuth } from "@/context/AuthContext";
-import Preloader from "@/components/elements/Preloader";
 
 export default function LoginPage() {
     const searchParams = useSearchParams();
@@ -51,9 +50,8 @@ export default function LoginPage() {
 
     return (
         <>
-            {loading && <Preloader />}
             <AlertContainer alerts={alerts} onClose={removeAlert}/>
-            <section className="login-page services-style1">
+            <section className="login-page services-style1" style={{ height: "100vh", minHeight: "100vh" }}>
                 {/* Shapes */}
                 <div className="shape1"></div>
                 <div className="shape2 rotate-me">
@@ -70,7 +68,7 @@ export default function LoginPage() {
                         <div className="col-xl-6 col-lg-7 col-md-10">
                             <div className="contact-page__form add-comment-box">
                                 <div className="inner-title text-center">
-                                    <h2>Login në Llogarinë tënde</h2>
+                                    <h2>Login në Llogarinë Tuaj</h2>
                                 </div>
 
                                 <form id="contact-form" className="default-form2" onSubmit={handleSubmit}>
@@ -110,7 +108,7 @@ export default function LoginPage() {
                                         <div className="col-xl-12">
                                             <div className="button-box text-center">
                                                 <button className="btn-one" type="submit" disabled={loading}>
-                                                    <span className="txt">Login</span>
+                                                    <span className="txt">{loading ? "Login..." : "Login"}</span>
                                                 </button>
                                             </div>
                                         </div>

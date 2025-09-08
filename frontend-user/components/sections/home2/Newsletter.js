@@ -1,6 +1,10 @@
-import Link from "next/link"
+'use client'
+import {useAuth} from "@/context/AuthContext";
 
 export default function Newsletter() {
+
+    const { user } = useAuth();
+
     return (
         <>
             {/*Start Newsletter Style1 */}
@@ -10,7 +14,7 @@ export default function Newsletter() {
                         {/*Start Newsletter Style1 Title */}
                         <div className="col-xl-4">
                             <div className="newsletter-style1__title">
-                                <h2>Subscribe To Our <br /> Newsletter</h2>
+                                <h2>Abonohuni për të <br />mos humbur asgjë </h2>
                             </div>
                         </div>
                         {/*End Newsletter Style1 Title */}
@@ -23,18 +27,27 @@ export default function Newsletter() {
                                         <ul>
                                             <li>
                                                 <div className="comment-form__input-box">
-                                                    <input type="text" placeholder="Your name" name="name" />
+                                                    <input type="text"
+                                                           placeholder="Emri"
+                                                           name="name"
+                                                           value = {user ? user.fullName : ""}
+                                                    />
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="comment-form__input-box">
-                                                    <input type="email" placeholder="Your email" name="email" />
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        name="email"
+                                                        value = {user ? user.email : ""}
+                                                    />
                                                 </div>
                                             </li>
                                         </ul>
                                         <div className="newsletter-style1__form-btn">
                                             <button type="submit" className="btn-one newsletter-style1__form-btn">
-                                                <span className="txt">Subscribe Now</span></button>
+                                                <span className="txt">Abonohu Tani</span></button>
                                         </div>
                                     </div>
                                 </form>

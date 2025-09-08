@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Menu from "../Menu"
 import MobileMenu from "../MobileMenu"
+import NavbarAuthIcon from "@/components/NavbarAuthIcon";
 
 export default function Header1({ scroll, isMobileMenu, handleMobileMenu, isSidebar, handlePopup, handleSidebar }) {
     return (
@@ -76,15 +77,17 @@ export default function Header1({ scroll, isMobileMenu, handleMobileMenu, isSide
 
                                         </div>
 
-                                        <div className="main-header-one__bottom-right-number">
-                                            <div className="icon">
-                                                <span className="icon-headphones"></span>
-                                            </div>
-                                            <div className="text">
-                                                <p>Telefononi</p>
-                                                <Link href="tel:3336660000">333 666 0000</Link>
-                                            </div>
-                                        </div>
+                                        {/*<div className="main-header-one__bottom-right-number">*/}
+                                        {/*    <div className="icon">*/}
+                                        {/*        <span className="icon-headphones"></span>*/}
+                                        {/*    </div>*/}
+                                        {/*    <div className="text">*/}
+                                        {/*        <p>Telefononi</p>*/}
+                                        {/*        <Link href="tel:3336660000">333 666 0000</Link>*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+
+                                        <NavbarAuthIcon />
 
                                         <div className="main-header-one__bottom-right-btn">
                                             <Link className="btn-one" href="#">
@@ -125,15 +128,17 @@ export default function Header1({ scroll, isMobileMenu, handleMobileMenu, isSide
                                         <Menu />
                                     </div>
 
-                                    <div className="main-header-one__bottom-right-number">
-                                        <div className="icon">
-                                            <span className="icon-headphones"></span>
-                                        </div>
-                                        <div className="text">
-                                            <p>Telefononi</p>
-                                            <Link href="tel:3336660000">333 666 0000</Link>
-                                        </div>
-                                    </div>
+                                    {/*<div className="main-header-one__bottom-right-number">*/}
+                                    {/*    <div className="icon">*/}
+                                    {/*        <span className="icon-headphones"></span>*/}
+                                    {/*    </div>*/}
+                                    {/*    <div className="text">*/}
+                                    {/*        <p>Telefononi</p>*/}
+                                    {/*        <Link href="tel:3336660000">333 666 0000</Link>*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
+
+                                    <NavbarAuthIcon />
 
                                     <div className="main-header-one__bottom-right-btn">
                                         <Link className="btn-one" href="#">

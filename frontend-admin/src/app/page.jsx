@@ -1,24 +1,27 @@
 import DashBoardLayerOne from "@/components/DashBoardLayerOne";
 import MasterLayout from "@/masterLayout/MasterLayout";
 import { Breadcrumb } from "react-bootstrap";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export const metadata = {
-  title: "WowDash NEXT JS - Admin Dashboard Multipurpose Bootstrap 5 Template",
-  description:
-    "Wowdash NEXT JS is a developer-friendly, ready-to-use admin template designed for building attractive, scalable, and high-performing web applications.",
+    title: "ADMIN | KlosiSmart",
+    description:
+        "ADMIN | KlosiSmart",
 };
 
 const Page = () => {
   return (
     <>
-      {/* MasterLayout */}
-      <MasterLayout>
-        {/* Breadcrumb */}
-        <Breadcrumb title='AI' />
+      <ProtectedRoute role="ROLE_ADMIN">
+          {/* MasterLayout */}
+          <MasterLayout>
+              {/* Breadcrumb */}
+              <Breadcrumb title='AI' />
 
-        {/* DashBoardLayerOne */}
-        <DashBoardLayerOne />
-      </MasterLayout>
+              {/* DashBoardLayerOne */}
+              <DashBoardLayerOne />
+          </MasterLayout>
+      </ProtectedRoute>
     </>
   );
 };

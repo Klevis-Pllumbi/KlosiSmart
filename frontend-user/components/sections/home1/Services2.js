@@ -27,15 +27,15 @@ export default function Services2() {
                             <div className="instant-services-style1__content">
                                 <div className="sec-title">
                                     <div className="sub-title">
-                                        <h6>Instant Services</h6>
+                                        <h6>Të gjitha shërbimet</h6>
                                     </div>
-                                    <h2>Quick Services From The <br /> City Municipal</h2>
+                                    <h2>Shërbimet që ofrohen nga platforma KlosiSmart</h2>
                                 </div>
 
                                 <div className="instant-services-style1__content-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis, suscipit mi
-                                        urna nulla at tincidunt feugiat vulputate.</p>
+                                    <p>Këtu do të gjeni të gjitha shërbimet që ofron kjo platformë për qytetarët.</p>
                                 </div>
+
                                 <div className="instant-services-style1__content-bottom">
                                     <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -46,7 +46,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Holiday Trash & Recycling</Link>
+                                                            <Link href="#">Njihuni me vendet turistike</Link>
                                                         </div>
                                                     </li>
 
@@ -55,7 +55,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Things To Do In Govarnex</Link>
+                                                            <Link href="#">Ndiqni lajmet më të fundit</Link>
                                                         </div>
                                                     </li>
 
@@ -64,7 +64,8 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Rent a Picnic Shelter</Link>
+                                                            <Link href="#">Zgjidhni eventet që dëshironi të
+                                                                ndiqni</Link>
                                                         </div>
                                                     </li>
 
@@ -73,16 +74,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Contact City Action Center</Link>
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <div className="icon">
-                                                            <span className="icon-check-mark"></span>
-                                                        </div>
-                                                        <div className="text">
-                                                            <Link href="#">Youth Activities Details</Link>
+                                                            <Link href="#">Raportoni problemet që hasni</Link>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -97,7 +89,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Fishing or Boating Permit</Link>
+                                                            <Link href="#">Jepni opinionin tuaj</Link>
                                                         </div>
                                                     </li>
 
@@ -106,8 +98,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Get a Birth / Death Certificate
-                                                            </Link>
+                                                            <Link href="#">Pyesni asistentin virtual</Link>
                                                         </div>
                                                     </li>
 
@@ -116,7 +107,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Register My Property Online</Link>
+                                                            <Link href="#">Abonohuni për të mos humbur asgjë</Link>
                                                         </div>
                                                     </li>
 
@@ -125,8 +116,7 @@ export default function Services2() {
                                                             <span className="icon-check-mark"></span>
                                                         </div>
                                                         <div className="text">
-                                                            <Link href="#">Apply for Submit a Tax Papers
-                                                            </Link>
+                                                            <Link href="#">Kërkoni diçka ose lini një koment</Link>
                                                         </div>
                                                     </li>
                                                 </ul>

@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +27,12 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String surname;
+
+    @Column(unique = true, nullable = false)
+    private String nid;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -47,7 +54,14 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     @Column(nullable = false)
-    private boolean enabled = true;
+    private boolean enabled = false;
+
+    @Column(nullable = false)
+    private String verificationToken;
+
+    private String forgotPasswordToken;
+
+    private LocalDateTime forgotPasswordTokenExpiry;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

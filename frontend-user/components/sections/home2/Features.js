@@ -17,9 +17,8 @@ export default function Features() {
                                 </div>
 
                                 <div className="features-style2__single-content">
-                                    <h3><Link href="#">Any Type of Medical <br /> Emergency</Link></h3>
-                                    <p>Facilisis orci magna ullamcorper orci ultricies egestas dolor volutpat pellentesque
-                                        ante.</p>
+                                    <h3><Link href="#">Emergjenca <br /> mjekësore</Link></h3>
+                                    <p>Reagim i menjëhershëm dhe kujdes i specializuar në çdo rast emergjence.</p>
                                 </div>
                             </li>
                             {/*End Features Style1 Single */}
@@ -31,9 +30,8 @@ export default function Features() {
                                 </div>
 
                                 <div className="features-style2__single-content">
-                                    <h3><Link href="#">For Police and Law <br /> Enforcement</Link></h3>
-                                    <p>Facilisis orci magna ullamcorper orci ultricies egestas dolor volutpat pellentesque
-                                        ante.</p>
+                                    <h3><Link href="#">Rendi & <br /> Siguria</Link></h3>
+                                    <p>Garantojmë rend dhe siguri për një komunitet më të qetë.</p>
                                 </div>
                             </li>
                             {/*End Features Style1 Single */}
@@ -45,9 +43,8 @@ export default function Features() {
                                 </div>
 
                                 <div className="features-style2__single-content">
-                                    <h3><Link href="#">Recycling & Garbage <br /> Related</Link></h3>
-                                    <p>Facilisis orci magna ullamcorper orci ultricies egestas dolor volutpat pellentesque
-                                        ante.</p>
+                                    <h3><Link href="#">Mjedisi & <br /> Riciklimi</Link></h3>
+                                    <p>Bashkë për mbrojtjen e natyrës dhe kujdesin ndaj mjedisit.</p>
                                 </div>
                             </li>
                             {/*End Features Style1 Single */}
@@ -59,9 +56,8 @@ export default function Features() {
                                 </div>
 
                                 <div className="features-style2__single-content">
-                                    <h3><Link href="#">Travel & Tourism <br /> Information</Link></h3>
-                                    <p>Facilisis orci magna ullamcorper orci ultricies egestas dolor volutpat pellentesque
-                                        ante.</p>
+                                    <h3><Link href="#">Informacion mbi <br /> Turizmin</Link></h3>
+                                    <p>Eksploroni historinë, kulturën dhe natyrën përreth jush.</p>
                                 </div>
                             </li>
                             {/*End Features Style1 Single */}

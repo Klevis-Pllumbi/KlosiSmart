@@ -1686,3 +1686,53 @@
 .header-style-three .main-menu .mobile-nav__toggler{
     color: #fff;
 }
+
+.navbar-auth__list {
+    list-style: none;
+    padding: 0;
+}
+
+.navbar-auth__list li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.navbar-auth__link {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: grey;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.navbar-auth__link svg {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    line-height: 45px;
+
+}
+
+.navbar-auth__link::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--thm-base);
+    transition: all 0.4s ease-in-out;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: -1;
+}
+
+.navbar-auth__link:hover::before {
+    transform: scaleY(1);
+}
