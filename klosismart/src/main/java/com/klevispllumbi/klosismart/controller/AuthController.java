@@ -1,7 +1,6 @@
 package com.klevispllumbi.klosismart.controller;
 
 import com.klevispllumbi.klosismart.dto.*;
-import com.klevispllumbi.klosismart.model.User;
 import com.klevispllumbi.klosismart.service.AuthService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")

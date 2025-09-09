@@ -11,6 +11,7 @@ import com.klevispllumbi.klosismart.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,15 +22,20 @@ import java.util.stream.Collectors;
 public class SurveyService {
 
     private final SurveyRepository surveyRepository;
+    private final FileStorageService fileStorageService;
 
-    public SurveyDto createSurvey(SurveyDto surveyDto) {
+    public SurveyDto createSurvey(SurveyDto surveyDto, MultipartFile file) {
         Survey survey = new Survey();
         survey.setTitle(surveyDto.title());
         survey.setDescription(surveyDto.description());
-        survey.setImageUrl(surveyDto.imageUrl());
         survey.setEndDate(surveyDto.endDate());
         survey.setCreatedAt(LocalDateTime.now());
         survey.setStatus(surveyDto.status() != null ? surveyDto.status() : SurveyStatus.DRAFT);
+
+        if (file != null && !file.isEmpty()) {
+            String imageUrl = fileStorageService.saveSurveyImage(file);
+            survey.setImageUrl(imageUrl);
+        }
 
         survey.setQuestions(
                 surveyDto.questions().stream().map(qDto -> {
@@ -97,24 +103,36 @@ public class SurveyService {
     }
 
     public void deleteSurvey(Long id) {
-        if (!surveyRepository.existsById(id)) {
-            throw new RuntimeException("Pyetësori nuk u gjet");
-        }
+        Survey survey = surveyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pyetësori nuk u gjet"));
+
+        String imageUrl = survey.getImageUrl();
+        fileStorageService.deleteSurveyImage(imageUrl);
+
         surveyRepository.deleteById(id);
     }
 
     @Transactional
-    public SurveyDto updateSurvey(Long id, SurveyDto surveyDto) {
+    public SurveyDto updateSurvey(Long id, SurveyDto surveyDto, MultipartFile file) {
         Survey survey = surveyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pyetësori nuk u gjet"));
 
         survey.setTitle(surveyDto.title());
         survey.setDescription(surveyDto.description());
         survey.setEndDate(surveyDto.endDate());
-        survey.setImageUrl(surveyDto.imageUrl());
+        survey.setStatus(surveyDto.status());
+
+        // Vetëm nëse vjen file i ri, përpunojmë imazhin dhe e vendosim url-në
+        if (file != null && !file.isEmpty()) {
+            String existingImageUrl = survey.getImageUrl();
+            fileStorageService.deleteSurveyImage(existingImageUrl);
+            // Ruaj imazhin në disk ose cloud dhe merr URL-në e re
+            String newImageUrl = fileStorageService.saveSurveyImage(file); // ose metoda që ke
+            survey.setImageUrl(newImageUrl);
+        }
+        // Nëse nuk ka file të ri, mbajmë URL ekzistuese
 
         survey.getQuestions().clear();
-
         surveyDto.questions().forEach(questionDto -> {
             Question question = new Question();
             question.setText(questionDto.text());

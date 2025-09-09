@@ -28,9 +28,9 @@ export default function Services() {
                                         <span className="icon-Group-5"></span>
                                     </div>
                                     <div className="services-style1__single-text">
-                                        <h3><Link href="/departments-details"> Jepni Opinionin <br /> Tuaj</Link></h3>
+                                        <h3><Link href="/surveys"> Jepni Opinionin <br /> Tuaj</Link></h3>
                                         <div className="btn-box">
-                                            <Link href="/departments-details"><span className="icon-right-arrow"></span></Link>
+                                            <Link href="/surveys"><span className="icon-right-arrow"></span></Link>
                                         </div>
                                     </div>
                                 </div>

@@ -37,7 +37,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                     </span>
                     <div className="logo-box">
                     <Link href="/" aria-label="logo image">
-                        <img src="assets/images/resources/mobile-nav-logo.png" alt="" />
+                        <img src="/assets/images/resources/mobile-nav-logo.png" alt="" />
                     </Link>
                     </div>
                     <div className="mobile-nav__container">
@@ -55,7 +55,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                                         <div className="col-lg-4">
                                                             <div className="home-showcase__item">
                                                                 <div className="home-showcase__image">
-                                                                    <img src="assets/images/home-showcase/home-showcase-1-1.jpg"
+                                                                    <img src="/assets/images/home-showcase/home-showcase-1-1.jpg"
                                                                         alt="" />
                                                                     <div className="home-showcase__buttons">
                                                                         <Link href="/"
@@ -81,7 +81,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                                         <div className="col-lg-4">
                                                             <div className="home-showcase__item">
                                                                 <div className="home-showcase__image">
-                                                                    <img src="assets/images/home-showcase/home-showcase-1-2.jpg"
+                                                                    <img src="/assets/images/home-showcase/home-showcase-1-2.jpg"
                                                                         alt="" />
                                                                     <div className="home-showcase__buttons">
                                                                         <Link href="/index-2"
@@ -107,7 +107,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                                         <div className="col-lg-4">
                                                             <div className="home-showcase__item">
                                                                 <div className="home-showcase__image">
-                                                                    <img src="assets/images/home-showcase/home-showcase-1-3.jpg"
+                                                                    <img src="/assets/images/home-showcase/home-showcase-1-3.jpg"
                                                                         alt="" />
                                                                     <div className="home-showcase__buttons">
                                                                         <Link href="/index-3"

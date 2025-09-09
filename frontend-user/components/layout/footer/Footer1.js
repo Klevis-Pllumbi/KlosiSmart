@@ -6,7 +6,7 @@ export default function Footer1() {
             {/*Start footer area */}
             <footer className="footer-area">
                 <div className="footer-area__shape1">
-                    <img src="assets/images/shapes/footer-v1-shape1.png" alt="#" />
+                    <img src="/assets/images/shapes/footer-v1-shape1.png" alt="#" />
                 </div>
                 {/*Start Footer */}
                 <div className="footer">
@@ -18,7 +18,7 @@ export default function Footer1() {
                                     <div className="our-company-info">
                                         <div className="footer-logo-style1">
                                             <Link href="/">
-                                                <img src="assets/images/footer/logo.png" alt="Awesome Logo"
+                                                <img src="/assets/images/footer/logo.png" alt="Awesome Logo"
                                                     title="" />
                                             </Link>
                                         </div>

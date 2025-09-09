@@ -3327,7 +3327,7 @@ const useReactApexChart = () => {
     },
     fill: {
       type: "gradient",
-      colors: ["#487FFF"], // Set the starting color (top color) here
+      colors: ["#dc2626"], // Set the starting color (top color) here
       gradient: {
         shade: "light", // Gradient shading type
         type: "vertical", // Gradient direction (vertical)
@@ -3364,15 +3364,15 @@ const useReactApexChart = () => {
     },
     yaxis: {
       labels: {
-        formatter: function (value) {
-          return (value / 1000).toFixed(0) + "k";
+        formatter: function (val) {
+          return val;
         },
       },
     },
     tooltip: {
       y: {
-        formatter: function (value) {
-          return value / 1000 + "k";
+        formatter: function (val) {
+          return val;
         },
       },
     },
@@ -3463,15 +3463,15 @@ const useReactApexChart = () => {
     },
     yaxis: {
       labels: {
-        formatter: function (value) {
-          return (value / 1000).toFixed(0) + "k";
+        formatter: function (val) {
+          return val;
         },
       },
     },
     tooltip: {
       y: {
-        formatter: function (value) {
-          return value / 1000 + "k";
+        formatter: function (val) {
+          return val;
         },
       },
     },
@@ -4231,7 +4231,19 @@ const useReactApexChart = () => {
       height: 264,
       type: "donut",
     },
-    colors: ["#16a34a", "#487fff", "#2563eb", "#dc2626", "#f86624", "#ffc107"],
+    colors: [
+      "#dc2626", // red
+      "#2563eb", // blue
+      "#9333ea", // green
+      "#16a34a", // purple
+      "#ffc107", // yellow
+      "#f86624", // orange
+      "#14b8a6", // teal
+      "#f43f5e", // pink
+      "#8b5cf6", // violet
+      "#22d3ee", // cyan
+      "#f97316"  // amber
+    ],
     dataLabels: {
       enabled: false,
     },

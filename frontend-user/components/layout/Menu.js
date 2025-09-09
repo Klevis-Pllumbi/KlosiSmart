@@ -26,16 +26,16 @@ export default function Menu() {
                                             <div className="col-lg-4">
                                                 <div className="home-showcase__item">
                                                     <div className="home-showcase__image">
-                                                        <img src="assets/images/home-showcase/home-showcase-1-1.jpg"
-                                                            alt="" />
+                                                        <img src="/assets/images/home-showcase/home-showcase-1-1.jpg"
+                                                             alt=""/>
                                                         <div className="home-showcase__buttons">
                                                             <Link href="/"
-                                                                className="btn-one home-showcase__buttons__item top">
+                                                                  className="btn-one home-showcase__buttons__item top">
                                                                 <span className="txt">Multi
                                                                     Page</span>
                                                             </Link>
                                                             <Link href="/index-one-page"
-                                                                className="btn-one home-showcase__buttons__item">
+                                                                  className="btn-one home-showcase__buttons__item">
                                                                 <span className="txt">One
                                                                     Page</span>
                                                             </Link>
@@ -52,16 +52,16 @@ export default function Menu() {
                                             <div className="col-lg-4">
                                                 <div className="home-showcase__item">
                                                     <div className="home-showcase__image">
-                                                        <img src="assets/images/home-showcase/home-showcase-1-2.jpg"
-                                                            alt="" />
+                                                        <img src="/assets/images/home-showcase/home-showcase-1-2.jpg"
+                                                             alt=""/>
                                                         <div className="home-showcase__buttons">
                                                             <Link href="/index-2"
-                                                                className="btn-one home-showcase__buttons__item top">
+                                                                  className="btn-one home-showcase__buttons__item top">
                                                                 <span className="txt">Multi
                                                                     Page</span>
                                                             </Link>
                                                             <Link href="/index-2-one-page"
-                                                                className="btn-one home-showcase__buttons__item">
+                                                                  className="btn-one home-showcase__buttons__item">
                                                                 <span className="txt">One
                                                                     Page</span>
                                                             </Link>
@@ -78,16 +78,16 @@ export default function Menu() {
                                             <div className="col-lg-4">
                                                 <div className="home-showcase__item">
                                                     <div className="home-showcase__image">
-                                                        <img src="assets/images/home-showcase/home-showcase-1-3.jpg"
-                                                            alt="" />
+                                                        <img src="/assets/images/home-showcase/home-showcase-1-3.jpg"
+                                                             alt=""/>
                                                         <div className="home-showcase__buttons">
                                                             <Link href="/index-3"
-                                                                className="btn-one home-showcase__buttons__item top">
+                                                                  className="btn-one home-showcase__buttons__item top">
                                                                 <span className="txt">Multi
                                                                     Page</span>
                                                             </Link>
                                                             <Link href="/index-3-one-page"
-                                                                className="btn-one home-showcase__buttons__item">
+                                                                  className="btn-one home-showcase__buttons__item">
                                                                 <span className="txt">One
                                                                     Page</span>
                                                             </Link>
@@ -117,15 +117,6 @@ export default function Menu() {
                     </ul>
                 </li>
                 <li className="dropdown">
-                    <Link href="#">Shërbime</Link>
-                    <ul>
-                        <li><Link href="/services">Services</Link></li>
-                        <li><Link href="/departments-1">Departments One</Link></li>
-                        <li><Link href="/departments-2">Departments Two</Link></li>
-                        <li><Link href="/departments-details">Departments Details</Link></li>
-                    </ul>
-                </li>
-                <li className="dropdown">
                     <Link href="#">Faqet</Link>
                     <ul>
                         <li><Link href="/testimonials">Testimonials</Link></li>
@@ -147,6 +138,15 @@ export default function Menu() {
                         <li><Link href="/blog-standard">News Standard</Link></li>
                         <li><Link href="/blog-details">News Details</Link></li>
                     </ul>
+                </li>
+                <li>
+                    <Link href="/surveys">Pyetësor</Link>
+                    {/*<ul>*/}
+                    {/*    <li><Link href="/services">Jepni opinionin tuaj</Link></li>*/}
+                    {/*    <li><Link href="/departments-1">Pyesi asistentin virtual</Link></li>*/}
+                    {/*    <li><Link href="/departments-2">Departments Two</Link></li>*/}
+                    {/*    <li><Link href="/departments-details">Departments Details</Link></li>*/}
+                    {/*</ul>*/}
                 </li>
                 <li>
                     <Link href="/contact">Kontakt</Link>

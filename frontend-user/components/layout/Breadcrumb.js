@@ -7,7 +7,7 @@ export default function Breadcrumb({ breadcrumbTitle }) {
             {/*Start Breadcrumb Style1 */}
             <section className="breadcrumb-style1">
                 <div className="breadcrumb-style1__bg"
-                    style={{ backgroundImage: 'url(assets/images/backgrounds/breadcrumb-v1-bg.jpg)'}}></div>
+                    style={{ backgroundImage: 'url(assets/images/slides/img.png)'}}></div>
                 <div className="auto-container">
                     <div className="row">
                         <div className="col-xl-12">

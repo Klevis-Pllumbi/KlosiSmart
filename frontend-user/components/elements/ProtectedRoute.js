@@ -14,9 +14,6 @@ const ProtectedRoute = ({ children, role }) => {
                 const currentPath = window.location.pathname + window.location.search;
                 router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
             }
-            // else if (role && user.role !== role) {
-            //     router.push("/unauthorized");
-            // }
         }
     }, [user, loadingUser, role, router]);
 

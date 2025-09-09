@@ -3710,6 +3710,102 @@ Instant Services Style3
 }
 
 
+
+/*****
+================================
+inputet
+=================================================
+*/
+
+/* Kontejneri i përgjithshëm për opsionet */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+}
+
+/* Fshi input-in default */
+input[type="radio"],
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Label i personalizuar */
+.custom-option {
+  position: relative;
+  padding-left: 32px;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 22px;
+  color: #333;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Kutia ose rrethi */
+.custom-option::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 1px solid #bbb;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Radio → rreth */
+input[type="radio"] + .custom-option::before {
+  border-radius: 50%;
+}
+
+/* Checkbox → katror */
+input[type="checkbox"] + .custom-option::before {
+  border-radius: 4px;
+}
+
+/* Hover efekt me hije */
+input[type="radio"] + .custom-option:hover::before,
+input[type="checkbox"] + .custom-option:hover::before {
+  box-shadow: 0 0 6px rgba(230, 57, 70, 0.5);
+}
+
+/* Kur janë zgjedhur */
+input[type="radio"]:checked + .custom-option::before,
+input[type="checkbox"]:checked + .custom-option::before {
+  border-color: #e63946;
+  background: #e63946;
+}
+
+/* Shënja për checkbox (qendruar në mes) */
+input[type="checkbox"]:checked + .custom-option::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+/* Shënja për radio (pikë e bardhë në qendër) */
+input[type="radio"]:checked + .custom-option::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
 /***
 =============================================
 Events Style3

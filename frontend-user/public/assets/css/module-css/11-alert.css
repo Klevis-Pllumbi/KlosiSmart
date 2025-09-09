@@ -51,27 +51,27 @@
 
 /* Variants */
 .alert-box.success {
-    background: rgba(46, 204, 113, 0.2);
+    background: rgba(46, 204, 113, 0.4);
     border: 1px solid #2ecc71;
-    color: #27ae60;
+    color: #1A7A43FF;
 }
 
 .alert-box.success h4 {
-    color: #27ae60;
+    color: #1A7A43FF;
 }
 
 .alert-box.error {
-    background: rgba(231, 76, 60, 0.2);
+    background: rgba(231, 76, 60, 0.4);
     border: 1px solid #e74c3c;
-    color: #c0392b;
+    color: #93271DFF;
 }
 
 .alert-box.error h4 {
-    color: #c0392b;
+    color: #93271DFF;
 }
 
 .alert-box.warning {
-    background: rgba(241, 196, 15, 0.2);
+    background: rgba(241, 196, 15, 0.4);
     border: 1px solid #f1c40f;
     color: #b7950b;
 }
@@ -81,7 +81,7 @@
 }
 
 .alert-box.info {
-    background: rgba(52, 152, 219, 0.2);
+    background: rgba(52, 152, 219, 0.4);
     border: 1px solid #3498db;
     color: #21618c;
 }

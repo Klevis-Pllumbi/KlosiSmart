@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import axios from "axios";
 import Loading from "@/components/child/Loading";
 import AlertContainer from "@/components/AlertContainer";
@@ -42,14 +41,16 @@ const SurveyListLayer = () => {
         return [
             survey.id,
             survey.title,
-            survey.description,
+            `<div style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${survey.description}">
+        ${survey.description}
+    </div>`,
             formatDate(survey.endDate),
             statusBadge,
             `<div class="d-flex">
-                <a href="/surveys/${survey.id}" class="w-32-px h-32-px me-8 bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="/survey-results/${survey.id}" class="w-32-px h-32-px me-8 bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
                 </a>
-                <a href="/surveys/edit/${survey.id}" class="w-32-px h-32-px me-8 bg-success-focus text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="/survey-edit/${survey.id}" class="w-32-px h-32-px me-8 bg-success-focus text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                 </a>
                 <button class="delete-btn w-32-px h-32-px me-8 bg-danger-focus text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center border-0" data-id="${survey.id}">

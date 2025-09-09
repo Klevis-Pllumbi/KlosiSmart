@@ -22,6 +22,8 @@ services:
       - mysql
     networks:
       - klosi_net
+    volumes:
+      - ./uploads:/uploads
 
   frontend-user:
     build:

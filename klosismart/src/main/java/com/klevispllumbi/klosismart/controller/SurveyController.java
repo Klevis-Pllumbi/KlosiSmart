@@ -2,10 +2,11 @@ package com.klevispllumbi.klosismart.controller;
 
 import com.klevispllumbi.klosismart.dto.SurveyDto;
 import com.klevispllumbi.klosismart.service.SurveyService;
-import jakarta.validation.Valid;
+import jakarta.validation.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,10 +18,15 @@ public class SurveyController {
     private final SurveyService surveyService;
 
     @PostMapping("/admin/surveys")
-    public ResponseEntity<SurveyDto> createSurvey(@Valid @RequestBody SurveyDto surveyDto) {
-        SurveyDto createdSurvey = surveyService.createSurvey(surveyDto);
+    public ResponseEntity<SurveyDto> createSurvey(
+            @RequestPart("survey") @Valid SurveyDto surveyDto,
+            @RequestPart(value = "file", required = false) MultipartFile file
+    ) {
+        SurveyDto createdSurvey = surveyService.createSurvey(surveyDto, file);
         return ResponseEntity.ok(createdSurvey);
     }
+
+
 
     @GetMapping("/user/surveys/active")
     public ResponseEntity<List<SurveyDto>> getActiveSurveys() {
@@ -47,9 +53,12 @@ public class SurveyController {
     }
 
     @PutMapping("/admin/surveys/{id}")
-    public ResponseEntity<SurveyDto> updateSurvey(@PathVariable Long id,
-                                                  @Valid @RequestBody SurveyDto surveyDto) {
-        SurveyDto updatedSurvey = surveyService.updateSurvey(id, surveyDto);
+    public ResponseEntity<SurveyDto> updateSurvey(
+            @PathVariable Long id,
+            @RequestPart("survey") @Valid SurveyDto surveyDto,
+            @RequestPart(value = "file", required = false) MultipartFile file) {
+
+        SurveyDto updatedSurvey = surveyService.updateSurvey(id, surveyDto, file);
         return ResponseEntity.ok(updatedSurvey);
     }
 
