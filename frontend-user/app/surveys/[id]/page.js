@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, notFound } from "next/navigation";
-import SurveyForm from "@/components/SurveyForm";
+import SurveyForm from "@/components/elements/SurveyForm";
 import axios from "axios";
 import Preloader from "@/components/elements/Preloader";
 

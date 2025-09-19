@@ -1,56 +1,72 @@
-'use client'
-import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+'use client';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loadingUser, setLoadingUser] = useState(true);
+    const mounted = useRef(true);
     const router = useRouter();
 
     useEffect(() => {
-        const fetchUser = async () => {
+        mounted.current = true;
+        const controller = new AbortController();
+
+        (async () => {
             try {
-                const res = await axios.get("http://localhost:8080/api/user/profile", {
+                const res = await axios.get('http://localhost:8080/api/user/profile', {
                     withCredentials: true,
+                    signal: controller.signal,
                 });
-                setUser(res.data);
-            } catch (err) {
-                setUser(null);
+                if (mounted.current) setUser(res.data ?? null);
+            } catch {
+                if (mounted.current) setUser(null);
             } finally {
-                setLoadingUser(false);
+                if (mounted.current) setLoadingUser(false);
             }
+        })();
+
+        return () => {
+            mounted.current = false;
+            controller.abort();
         };
-        fetchUser();
     }, []);
 
     const loginUser = async (email, password) => {
         try {
             const res = await axios.post(
-                "http://localhost:8080/api/auth/login",
+                'http://localhost:8080/api/auth/login',
                 { email, password },
                 { withCredentials: true }
             );
             setUser({ email: res.data.email, role: res.data.role });
             return { success: true };
         } catch (err) {
-            return { success: false, message: err.response?.data?.message || err.response?.data?.error || "Ndodhi një gabim gjatë login." };
+            return {
+                success: false,
+                message:
+                    err.response?.data?.message ||
+                    err.response?.data?.error ||
+                    'Ndodhi një gabim gjatë login.',
+            };
         }
     };
 
     const logoutUser = async () => {
-        await axios.post("http://localhost:8080/api/auth/logout", {}, { withCredentials: true });
-        setUser(null);
-        router.push("/");
+        try {
+            await axios.post('http://localhost:8080/api/auth/logout', {}, { withCredentials: true });
+        } finally {
+            setUser(null);
+            router.push('/');
+        }
     };
 
-    return (
-        <AuthContext.Provider value={{ user, loadingUser, loginUser, logoutUser }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    const value = useMemo(() => ({ user, loadingUser, loginUser, logoutUser }), [user, loadingUser]);
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

@@ -13,131 +13,24 @@ export default function Menu() {
             </ul> */}
 
             <ul className="main-menu__list">
-                <li className="dropdown megamenu">
+                {/*<li className="dropdown megamenu">*/}
+                <li>
                     <Link href="/">Kreu </Link>
-                    <ul>
-                        <li>
-                            <div className="megamenu-content-box">
-                                <div className="container">
-                                    <div className="megamenu-content-box__inner">
-                                        <div className="row">
 
-                                            {/*Start Home Showcase Item */}
-                                            <div className="col-lg-4">
-                                                <div className="home-showcase__item">
-                                                    <div className="home-showcase__image">
-                                                        <img src="/assets/images/home-showcase/home-showcase-1-1.jpg"
-                                                             alt=""/>
-                                                        <div className="home-showcase__buttons">
-                                                            <Link href="/"
-                                                                  className="btn-one home-showcase__buttons__item top">
-                                                                <span className="txt">Multi
-                                                                    Page</span>
-                                                            </Link>
-                                                            <Link href="/index-one-page"
-                                                                  className="btn-one home-showcase__buttons__item">
-                                                                <span className="txt">One
-                                                                    Page</span>
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                    <h3 className="home-showcase__title">
-                                                        Home Page One
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                            {/*End Home Showcase Item */}
-
-                                            {/*Start Home Showcase Item */}
-                                            <div className="col-lg-4">
-                                                <div className="home-showcase__item">
-                                                    <div className="home-showcase__image">
-                                                        <img src="/assets/images/home-showcase/home-showcase-1-2.jpg"
-                                                             alt=""/>
-                                                        <div className="home-showcase__buttons">
-                                                            <Link href="/index-2"
-                                                                  className="btn-one home-showcase__buttons__item top">
-                                                                <span className="txt">Multi
-                                                                    Page</span>
-                                                            </Link>
-                                                            <Link href="/index-2-one-page"
-                                                                  className="btn-one home-showcase__buttons__item">
-                                                                <span className="txt">One
-                                                                    Page</span>
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                    <h3 className="home-showcase__title">
-                                                        Home Page Two
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                            {/*End Home Showcase Item */}
-
-                                            {/*Start Home Showcase Item */}
-                                            <div className="col-lg-4">
-                                                <div className="home-showcase__item">
-                                                    <div className="home-showcase__image">
-                                                        <img src="/assets/images/home-showcase/home-showcase-1-3.jpg"
-                                                             alt=""/>
-                                                        <div className="home-showcase__buttons">
-                                                            <Link href="/index-3"
-                                                                  className="btn-one home-showcase__buttons__item top">
-                                                                <span className="txt">Multi
-                                                                    Page</span>
-                                                            </Link>
-                                                            <Link href="/index-3-one-page"
-                                                                  className="btn-one home-showcase__buttons__item">
-                                                                <span className="txt">One
-                                                                    Page</span>
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                    <h3 className="home-showcase__title">
-                                                        Home Page Three
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                            {/*End Home Showcase Item */}
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </li>
-                    </ul>
                 </li>
                 <li className="dropdown">
                     <Link href="#">Info</Link>
                     <ul>
-                        <li><Link href="/about">Rreth nesh</Link></li>
                         <li><Link href="/history">Histori</Link></li>
+                        <li><Link href="/faq">FAQ</Link></li>
+                        <li><Link href="/portfolio-grid">Galeria turistike</Link></li>
                     </ul>
                 </li>
-                <li className="dropdown">
-                    <Link href="#">Faqet</Link>
-                    <ul>
-                        <li><Link href="/testimonials">Testimonials</Link></li>
-                        <li><Link href="/faq">Faq</Link></li>
-                        <li><Link href="/portfolio-grid">Portfolio One</Link></li>
-                        <li><Link href="/portfolio-masonry">Portfolio Two</Link></li>
-                        <li><Link href="/team-1">Team One</Link></li>
-                        <li><Link href="/team-2">Team Two</Link></li>
-                        <li><Link href="/team-details">Team Details</Link></li>
-                        <li><Link href="/events-1">Events One</Link></li>
-                        <li><Link href="/events-2">Events Two</Link></li>
-                        <li><Link href="/event-details">Event Details</Link></li>
-                    </ul>
+                <li>
+                    <Link href="/events">Evente</Link>
                 </li>
-                <li className="dropdown">
-                    <Link href="#">Lajme</Link>
-                    <ul>
-                        <li><Link href="/blog-grid">News Grid</Link></li>
-                        <li><Link href="/blog-standard">News Standard</Link></li>
-                        <li><Link href="/blog-details">News Details</Link></li>
-                    </ul>
+                <li>
+                    <Link href="/news">Lajme</Link>
                 </li>
                 <li>
                     <Link href="/surveys">Pyetësor</Link>

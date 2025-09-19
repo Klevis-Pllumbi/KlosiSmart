@@ -899,6 +899,12 @@
     background-color: var(--thm-base);
 }
 
+.single-sidebar-box .popular-tag .active a {
+    color: #ffffff;
+    border-color: var(--thm-base);
+    background-color: var(--thm-base);
+}
+
 
 /*** 
 =============================================

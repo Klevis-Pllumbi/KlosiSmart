@@ -1,7 +1,8 @@
 import PluginInit from "@/helper/PluginInit";
 import "./font.css";
 import "./globals.css";
-import { AuthProvider } from "@/context/AuthContext";
+import Providers from "@/app/Provider";
+import {PreloaderProvider} from "@/components/child/PreloaderProvider";
 
 export const metadata = {
     title: "ADMIN | KlosiSmart",
@@ -14,9 +15,10 @@ export default function RootLayout({ children }) {
         <html lang="en">
         <PluginInit />
         <body suppressHydrationWarning={true}>
-        <AuthProvider>
+        <PreloaderProvider />
+        <Providers>
             {children}
-        </AuthProvider>
+        </Providers>
         </body>
         </html>
     );

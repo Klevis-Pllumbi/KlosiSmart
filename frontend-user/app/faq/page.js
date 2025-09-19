@@ -22,7 +22,7 @@ export default function Home() {
     }
     return (
         <>
-            <Layout headerStyle={2} footerStyle={1} breadcrumbTitle="FAQ’S">
+            <Layout headerStyle={1} footerStyle={1} breadcrumbTitle="FAQ’S">
                 <div>
                     
                     {/*Start Faq Page */}
@@ -30,7 +30,7 @@ export default function Home() {
                         <div className="faq-page__bg"><img src="assets/images/backgrounds/faq-page-bg.png" alt="" /></div>
                         <div className="auto-container">
                             <div className="row">
-                                <div className="col-xl-8 col-lg-7">
+                                <div className="col-xl-12 col-lg-7">
                                     {/*Start Faq Page Content */}
                                     <div className="faq-page__content">
                                         <div className="sec-title">
@@ -117,35 +117,6 @@ export default function Home() {
                                     {/*End Faq Page Content */}
                                 </div>
 
-                                {/*Start Faq Form Box */}
-                                <div className="col-xl-4 col-lg-5">
-                                    <div className="faq-form-box">
-                                        <div className="faq-form-box__title">
-                                            <h3>Asked Your Valuable <br /> Question</h3>
-                                        </div>
-                                        <form id="faq-form" name="faq_form" className="default-form1" action="#" method="post">
-                                            <div className="input-box">
-                                                <input type="text" name="form_name"  placeholder="Your name" required="" />
-                                            </div>
-                                            <div className="input-box">
-                                                <input type="email" name="form_email"  placeholder="Your email" required="" />
-                                            </div>
-                                            <div className="input-box">
-                                                <input type="text" name="form_phone"  id="formPhone"
-                                                    placeholder="Phone number" />
-                                            </div>
-                                            <div className="input-box">
-                                                <textarea name="form_message" placeholder="Type message" required=""></textarea>
-                                            </div>
-                                            <div className="button-box">
-                                                <button className="btn-one" type="submit" data-loading-text="Please wait...">
-                                                    <span className="txt">Submit Now</span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                {/*End Faq Form Box */}
                             </div>
                         </div>
                     </section>

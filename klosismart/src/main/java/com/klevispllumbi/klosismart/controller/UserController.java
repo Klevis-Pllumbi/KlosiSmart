@@ -19,6 +19,9 @@ public class UserController {
         Map<String, Object> res = new HashMap<>();
         res.put("email", user.getEmail());
         res.put("fullName", user.getName() + " " + user.getSurname());
+        res.put("name", user.getName());
+        res.put("surname", user.getSurname());
+        res.put("nid", user.getNid());
         res.put("role", user.getRole().getAuthority());
         return ResponseEntity.ok(res);
     }

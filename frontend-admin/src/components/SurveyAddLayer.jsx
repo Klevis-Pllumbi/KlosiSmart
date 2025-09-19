@@ -2,6 +2,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import AlertContainer from "@/components/AlertContainer";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import {Icon} from "@iconify/react";
 
 const SurveyAddLayer = ({ initialData }) => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -130,6 +133,48 @@ const SurveyAddLayer = ({ initialData }) => {
         setCurrentStep(prev => prev + 1);
     };
 
+    // ----------- Delete Question ------------
+    const deleteCurrentQuestion = async () => {
+        if (currentStep < 2 || currentStep > totalSteps) return;
+
+        const idx = currentStep - 2; // indeksi i pyetjes në array
+        const blank = { text: "", type: "SINGLE_CHOICE", options: [{ text: "" }] };
+
+        const { isConfirmed } = await Swal.fire({
+            title: "Fshi këtë pyetje?",
+            text: "Ky veprim nuk mund të zhbëhet.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Po, fshije",
+            cancelButtonText: "Anulo",
+        });
+        if (!isConfirmed) return;
+
+        const existsAtIndex = !!surveyData.questions[idx];
+
+        const updated = existsAtIndex
+            ? surveyData.questions.filter((_, i) => i !== idx)
+            : [...surveyData.questions];
+
+        setSurveyData(prev => ({ ...prev, questions: updated }));
+
+        if (existsAtIndex) {
+            setTotalSteps(ts => Math.max(2, ts - 1));
+            const newIdx = Math.min(idx, updated.length - 1);
+
+            if (updated.length > 0) {
+                setCurrentQuestion(updated[newIdx]);
+                setCurrentStep(newIdx + 2);
+            } else {
+                setCurrentQuestion(blank);
+                setCurrentStep(2);
+            }
+            addAlert("success", "U fshi", "Pyetja u fshi me sukses.");
+        } else {
+            setCurrentQuestion(blank);
+        }
+    };
+
     // ----------- Load Question for currentStep ------------
     useEffect(() => {
         if (currentStep >= 2 && currentStep <= totalSteps) {
@@ -232,10 +277,89 @@ const SurveyAddLayer = ({ initialData }) => {
         }
     };
 
+    // === AI modal state ===
+    const [aiOpen, setAiOpen] = useState(false);
+    const [aiLoading, setAiLoading] = useState(false);
+    const [aiForm, setAiForm] = useState({
+        brief: "",
+        maxQuestions: 8,
+        allowOpenText: true,
+        allowMultipleChoice: true,
+        allowSingleChoice: true,
+    });
+
+// Fut draft-in në formë
+    const applyDraftToForm = (draft) => {
+        setSurveyData(prev => ({
+            ...prev,
+            title: draft.title || prev.title,
+            description: draft.description || prev.description,
+            status: "DRAFT",
+            questions: (draft.questions || []).map(q => ({
+                text: q.text,
+                type: q.type, // SINGLE_CHOICE | MULTIPLE_CHOICE | OPEN_TEXT
+                options: (q.options || []).map(o => ({ text: o.text }))
+            }))
+        }));
+
+        const qs = draft.questions || [];
+        setTotalSteps(qs.length + 1);
+        setCurrentStep(qs.length ? 1 : 1);
+        setCurrentQuestion(qs.length
+            ? { ...qs[0], options: (qs[0].options || []).map(o => ({ text: o.text })) }
+            : { text: "", type: "SINGLE_CHOICE", options: [{ text: "" }] }
+        );
+
+        addAlert("success", "Gati!", "Pyetjet u gjeneruan me sukses.");
+    };
+
+// Thirr backend-in
+    const submitAiGenerate = async () => {
+        if (!aiForm.brief.trim()) {
+            addAlert("error", "Përshkrim i munguar", "Shkruaj një përshkrim të shkurtër.");
+            return;
+        }
+        setAiLoading(true);
+        try {
+            const res = await axios.post(
+                "http://localhost:8080/api/admin/surveys/ai-generate",
+                {
+                    brief: aiForm.brief,
+                    maxQuestions: aiForm.maxQuestions,
+                    allowOpenText: aiForm.allowOpenText,
+                    allowMultipleChoice: aiForm.allowMultipleChoice,
+                    allowSingleChoice: aiForm.allowSingleChoice
+                },
+                { withCredentials: true }
+            );
+            applyDraftToForm(res.data);   // SurveyDto
+            setAiOpen(false);
+        } catch (err) {
+            const msg = err?.response?.data?.error || "Gabim gjatë gjenerimit. Provo sërish.";
+            addAlert("error", "Gabim", msg);
+        } finally {
+            setAiLoading(false);
+        }
+    };
+
+// stile minimale për modal-in
+    const aiModalStyles = {
+        overlay: {
+            position: "fixed", inset: 0, background: "rgba(0,0,0,.35)",
+            zIndex: 1050, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem"
+        },
+        panel: { width: "100%", maxWidth: 720 }
+    };
 
     const isChoiceQuestionInvalid =
         (currentQuestion.type === "SINGLE_CHOICE" || currentQuestion.type === "MULTIPLE_CHOICE") &&
         currentQuestion.options.filter(opt => opt.text.trim() !== "").length < 2;
+
+    const iconBtnStyle = {
+        width: 40, height: 40, padding: 0,
+        display: "inline-flex", alignItems: "center", justifyContent: "center"
+    };
+
 
     // ----------- JSX ------------
     return (
@@ -307,7 +431,10 @@ const SurveyAddLayer = ({ initialData }) => {
                                                 rows="3"
                                                 placeholder="Shkruaj një përshkrim të shkurtër për pyetësorin"
                                                 value={surveyData.description}
-                                                onChange={(e) => setSurveyData({...surveyData, description: e.target.value})}
+                                                onChange={(e) => setSurveyData({
+                                                    ...surveyData,
+                                                    description: e.target.value
+                                                })}
                                             />
                                         </div>
                                         <div className="col-sm-6">
@@ -325,10 +452,23 @@ const SurveyAddLayer = ({ initialData }) => {
                                                 type="datetime-local"
                                                 className="form-control"
                                                 value={surveyData.endDate}
-                                                onChange={(e) => setSurveyData({...surveyData, endDate: e.target.value})}
+                                                onChange={(e) => setSurveyData({
+                                                    ...surveyData,
+                                                    endDate: e.target.value
+                                                })}
                                             />
                                         </div>
-                                        <div className="form-group text-end">
+                                        <div className="form-group d-flex justify-content-between">
+                                            {!initialData && (
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-primary-500 px-32"
+                                                    onClick={() => setAiOpen(true)}
+                                                >
+                                                    Gjenero me IA
+                                                </button>
+                                            )}
+
                                             <button
                                                 onClick={nextStep}
                                                 type="button"
@@ -346,7 +486,7 @@ const SurveyAddLayer = ({ initialData }) => {
                             {currentStep > 1 && currentStep <= totalSteps && (
                                 <fieldset className="wizard-fieldset show">
                                     <h6 className="text-md text-neutral-500">
-                                        Pyetja {currentStep - 1}
+                                    Pyetja {currentStep - 1}
                                     </h6>
                                     <div className="row gy-3">
                                         <div className="col-12">
@@ -422,39 +562,53 @@ const SurveyAddLayer = ({ initialData }) => {
                                                 {currentStep > 1 && currentStep < totalSteps && (
                                                     <button
                                                         type="button"
-                                                        className="btn btn-outline-secondary px-32"
+                                                        className="btn btn-outline-secondary rounded-circle"
+                                                        style={iconBtnStyle}
+                                                        title="Pyetja Pasardhëse"
+                                                        aria-label="Pyetja Pasardhëse"
                                                         onClick={() => {
-                                                            saveCurrentQuestion(); // ruaj pyetjen aktuale
+                                                            saveCurrentQuestion();
 
-                                                            const nextStep = currentStep + 1; // hapi tjetër
-                                                            const nextQuestionIndex = nextStep - 2; // array pyetjeve fillon nga 0
+                                                            const nextStepVal = currentStep + 1;
+                                                            const nextQuestionIndex = nextStepVal - 2;
 
                                                             if (surveyData.questions[nextQuestionIndex]) {
                                                                 setCurrentQuestion(surveyData.questions[nextQuestionIndex]);
-                                                                setCurrentStep(nextStep);
+                                                                setCurrentStep(nextStepVal);
                                                             } else {
-                                                                // Në rast se nuk ka pyetje në atë index, thjesht shkojmë tek nextStep dhe pastrojmë
-                                                                setCurrentQuestion({
-                                                                    text: "",
-                                                                    type: "SINGLE_CHOICE",
-                                                                    options: [{ text: "" }]
-                                                                });
-                                                                setCurrentStep(nextStep);
+                                                                setCurrentQuestion({ text: "", type: "SINGLE_CHOICE", options: [{ text: "" }] });
+                                                                setCurrentStep(nextStepVal);
                                                             }
                                                         }}
                                                     >
-                                                        Pyetja Pasardhëse
+                                                        <Icon icon="lucide:chevron-right" width={18} height={18} />
                                                     </button>
                                                 )}
 
                                                 <button
                                                     type="button"
-                                                    className="btn btn-outline-primary px-32"
+                                                    className="btn btn-outline-danger rounded-circle"
+                                                    style={iconBtnStyle}
+                                                    title="Fshi këtë pyetje"
+                                                    aria-label="Fshi këtë pyetje"
+                                                    onClick={deleteCurrentQuestion}
+                                                    disabled={currentStep < 2 || currentStep > totalSteps || !surveyData.questions[currentStep-2]}
+                                                >
+                                                    <Icon icon="lucide:trash-2" width={18} height={18}/>
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-primary rounded-circle"
+                                                    style={iconBtnStyle}
+                                                    title="Shto Pyetje Tjetër"
+                                                    aria-label="Shto Pyetje Tjetër"
                                                     onClick={addNewQuestion}
                                                     disabled={!currentQuestion.text.trim() || isChoiceQuestionInvalid}
                                                 >
-                                                    Shto Pyetje Tjetër
+                                                    <Icon icon="lucide:plus" width={18} height={18} />
                                                 </button>
+
 
                                                 <button
                                                     type="button"
@@ -525,6 +679,129 @@ const SurveyAddLayer = ({ initialData }) => {
                     </div>
                 </div>
             </div>
+
+            {aiOpen && (
+                <div style={aiModalStyles.overlay} role="dialog" aria-modal="true">
+                    <div className="card shadow-lg" style={aiModalStyles.panel}>
+                        <div className="card-header d-flex justify-content-between align-items-center">
+                            <h6 className="mb-0">Gjenero pyetësorin me IA</h6>
+                            <button
+                                className="btn btn-sm btn-neutral-500 border-neutral-100"
+                                onClick={() => !aiLoading && setAiOpen(false)}
+                                disabled={aiLoading}
+                            >
+                                Mbyll
+                            </button>
+                        </div>
+
+                        <div className="card-body">
+                            <div className="mb-3">
+                                <label className="form-label">Përshkrim*</label>
+                                <textarea
+                                    className="form-control"
+                                    rows={4}
+                                    placeholder="Përshkruaj qëllimin, audiencën dhe çfarë do të matësh…"
+                                    value={aiForm.brief}
+                                    onChange={(e) => setAiForm(f => ({ ...f, brief: e.target.value }))}
+                                    disabled={aiLoading}
+                                />
+                            </div>
+
+                            <div className="row gy-3">
+                                <div className="col-sm-4">
+                                    <label className="form-label"># Pyetje (1–15)</label>
+                                    <input
+                                        type="number"
+                                        min={1}
+                                        max={15}
+                                        className="form-control"
+                                        value={aiForm.maxQuestions}
+                                        onChange={(e) => setAiForm(f => ({
+                                            ...f,
+                                            maxQuestions: Math.max(1, Math.min(15, Number(e.target.value || 8)))
+                                        }))}
+                                        disabled={aiLoading}
+                                    />
+                                </div>
+                                <div className="col-sm-8 d-flex align-items-end gap-3 flex-wrap">
+                                    <div className="form-check form-check-inline d-flex align-items-center">
+                                        <input
+                                            id="ai-allow-open"
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            checked={aiForm.allowOpenText}
+                                            onChange={(e) => setAiForm(f => ({...f, allowOpenText: e.target.checked}))}
+                                            disabled={aiLoading}
+                                        />
+                                        <label className="form-check-label ms-2 mb-0" htmlFor="ai-allow-open">
+                                            Lejo pyetje të hapura
+                                        </label>
+                                    </div>
+
+                                    <div className="form-check form-check-inline d-flex align-items-center">
+                                        <input
+                                            id="ai-allow-multi"
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            checked={aiForm.allowMultipleChoice}
+                                            onChange={(e) => setAiForm(f => ({
+                                                ...f,
+                                                allowMultipleChoice: e.target.checked
+                                            }))}
+                                            disabled={aiLoading}
+                                        />
+                                        <label className="form-check-label ms-2 mb-0" htmlFor="ai-allow-multi">
+                                            Lejo pyetje me shumë zgjedhje
+                                        </label>
+                                    </div>
+
+                                    <div className="form-check form-check-inline d-flex align-items-center">
+                                        <input
+                                            id="ai-allow-single"
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            checked={aiForm.allowSingleChoice}
+                                            onChange={(e) => setAiForm(f => ({
+                                                ...f,
+                                                allowSingleChoice: e.target.checked
+                                            }))}
+                                            disabled={aiLoading}
+                                        />
+                                        <label className="form-check-label ms-2 mb-0" htmlFor="ai-allow-single">
+                                            Lejo pyetje me një zgjedhje
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div className="card-footer d-flex justify-content-end gap-2">
+                            <button
+                                className="btn btn-neutral-500 border-neutral-100"
+                                onClick={() => setAiOpen(false)}
+                                disabled={aiLoading}
+                            >
+                                Anulo
+                            </button>
+                            <button
+                                className="btn btn-primary-600 px-32"
+                                onClick={submitAiGenerate}
+                                disabled={aiLoading}
+                            >
+                                {aiLoading ? (
+                                    <span className="d-inline-flex align-items-center gap-2">
+                                      <span className="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true"></span>
+                                      Duke gjeneruar…
+                                    </span>
+                                ) : "Gjenero"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </>
     );
 };

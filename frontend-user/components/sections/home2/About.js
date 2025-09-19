@@ -31,7 +31,7 @@ export default function About() {
                                 </div>
                             </div>
                             <div className="inner">
-                                <img src="assets/images/about/about-v2-img1.jpg" alt="#" />
+                                <img src="/assets/images/about/img.png" alt="#" />
                             </div>
                             <div className="about-style2__experience-box">
                                 <h2>
@@ -91,7 +91,7 @@ export default function About() {
                                     </ul>
 
                                     <div className="about-style2__content-bottom-img">
-                                        <img src="assets/images/about/about-v2-img2.jpg" alt="#"/>
+                                        <img src="assets/images/about/stema.png" alt="#" style={{width: 150}}/>
                                     </div>
                                 </div>
                                 <div className="btn-box">

@@ -10,16 +10,16 @@ export default function Home() {
 
     return (
         <>
-            <Layout headerStyle={2} footerStyle={1} breadcrumbTitle="Portfolio Grid">
+            <Layout headerStyle={1} footerStyle={1} breadcrumbTitle="Portfolio Grid">
                 
                 {/*Start Portfolio Style1 */}
                 <section className="portfolio-style1 portfolio-style1--grid">
                     <div className="auto-container">
                         <div className="sec-title text-center">
                             <div className="sub-title">
-                                <h6>portfolio</h6>
+                                <h6>galeri</h6>
                             </div>
-                            <h2>What We Have Done In Our <br /> City Council</h2>
+                            <h2>Galeria jonë me vende turistike në<br /> Bashkinë Klos</h2>
                         </div>
                         <PortfolioFilter1/>
                     </div>

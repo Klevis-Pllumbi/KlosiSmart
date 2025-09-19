@@ -81,7 +81,7 @@ export default function Home() {
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-12 col-md-6">
                                                     <div className="img-box">
-                                                        <img src="assets/images/resources/event-details-img3.jpg" alt="#" />
+                                                        <img src="/assets/images/resources/event-details-img3.jpg" alt="#" />
                                                     </div>
                                                 </div>
 

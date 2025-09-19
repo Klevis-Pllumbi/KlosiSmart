@@ -5,7 +5,7 @@ export default function Home() {
 
     return (
         <>
-            <Layout headerStyle={2} footerStyle={1} breadcrumbTitle="Our History">
+            <Layout headerStyle={1} footerStyle={1} breadcrumbTitle="Histori">
                 <div>
                 {/*Start History Timeline */}
                 <section className="history-timeline">

@@ -1,9 +1,11 @@
 'use client'
 import Link from "next/link"
 import { useState } from "react"
-import NavbarAuthIcon from "@/components/NavbarAuthIcon";
+import NavbarAuthIcon from "@/components/elements/NavbarAuthIcon";
 import {useAuth} from "@/context/AuthContext";
 import {LogOut, UserCircle} from "lucide-react";
+import NavbarChatIcon from "@/components/elements/NavbarChatIcon";
+import {Icon} from "@iconify/react";
 export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar }) {
     const [isActive, setIsActive] = useState({
         status: false,
@@ -44,7 +46,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                         <ul className="main-menu__list">
                             <li className={isActive.key == 3 ? "dropdown current" : "dropdown"}>
                                 <Link href="/#" onClick={handleMobileMenu}>Kreu</Link>
-                                <ul style={{ display: `${isActive.key == 3 ? "block" : "none"}` }}>
+                                <ul style={{display: `${isActive.key == 3 ? "block" : "none"}`}}>
                                     <li>
                                         <div className="megamenu-content-box">
                                             <div className="container">
@@ -55,17 +57,20 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                                         <div className="col-lg-4">
                                                             <div className="home-showcase__item">
                                                                 <div className="home-showcase__image">
-                                                                    <img src="/assets/images/home-showcase/home-showcase-1-1.jpg"
-                                                                        alt="" />
+                                                                    <img
+                                                                        src="/assets/images/home-showcase/home-showcase-1-1.jpg"
+                                                                        alt=""/>
                                                                     <div className="home-showcase__buttons">
                                                                         <Link href="/"
-                                                                            className="btn-one home-showcase__buttons__item top">
-                                                                            <span className="txt" onClick={handleMobileMenu}>Multi
+                                                                              className="btn-one home-showcase__buttons__item top">
+                                                                            <span className="txt"
+                                                                                  onClick={handleMobileMenu}>Multi
                                                                                 Page</span>
                                                                         </Link>
                                                                         <Link href="/index-one-page"
-                                                                            className="btn-one home-showcase__buttons__item">
-                                                                            <span className="txt" onClick={handleMobileMenu}>One
+                                                                              className="btn-one home-showcase__buttons__item">
+                                                                            <span className="txt"
+                                                                                  onClick={handleMobileMenu}>One
                                                                                 Page</span>
                                                                         </Link>
                                                                     </div>
@@ -81,17 +86,20 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                                         <div className="col-lg-4">
                                                             <div className="home-showcase__item">
                                                                 <div className="home-showcase__image">
-                                                                    <img src="/assets/images/home-showcase/home-showcase-1-2.jpg"
-                                                                        alt="" />
+                                                                    <img
+                                                                        src="/assets/images/home-showcase/home-showcase-1-2.jpg"
+                                                                        alt=""/>
                                                                     <div className="home-showcase__buttons">
                                                                         <Link href="/index-2"
-                                                                            className="btn-one home-showcase__buttons__item top">
-                                                                            <span className="txt" onClick={handleMobileMenu}>Multi
+                                                                              className="btn-one home-showcase__buttons__item top">
+                                                                            <span className="txt"
+                                                                                  onClick={handleMobileMenu}>Multi
                                                                                 Page</span>
                                                                         </Link>
                                                                         <Link href="/index-2-one-page"
-                                                                            className="btn-one home-showcase__buttons__item">
-                                                                            <span className="txt" onClick={handleMobileMenu}>One
+                                                                              className="btn-one home-showcase__buttons__item">
+                                                                            <span className="txt"
+                                                                                  onClick={handleMobileMenu}>One
                                                                                 Page</span>
                                                                         </Link>
                                                                     </div>
@@ -107,17 +115,20 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                                         <div className="col-lg-4">
                                                             <div className="home-showcase__item">
                                                                 <div className="home-showcase__image">
-                                                                    <img src="/assets/images/home-showcase/home-showcase-1-3.jpg"
-                                                                        alt="" />
+                                                                    <img
+                                                                        src="/assets/images/home-showcase/home-showcase-1-3.jpg"
+                                                                        alt=""/>
                                                                     <div className="home-showcase__buttons">
                                                                         <Link href="/index-3"
-                                                                            className="btn-one home-showcase__buttons__item top">
-                                                                            <span className="txt" onClick={handleMobileMenu}>Multi
+                                                                              className="btn-one home-showcase__buttons__item top">
+                                                                            <span className="txt"
+                                                                                  onClick={handleMobileMenu}>Multi
                                                                                 Page</span>
                                                                         </Link>
                                                                         <Link href="/index-3-one-page"
-                                                                            className="btn-one home-showcase__buttons__item">
-                                                                            <span className="txt" onClick={handleMobileMenu}>One
+                                                                              className="btn-one home-showcase__buttons__item">
+                                                                            <span className="txt"
+                                                                                  onClick={handleMobileMenu}>One
                                                                                 Page</span>
                                                                         </Link>
                                                                     </div>
@@ -137,71 +148,58 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
 
                                     </li>
                                 </ul>
-                                <div className={isActive.key == 3 ? "dropdown-btn open" : "dropdown-btn"} onClick={() => handleToggle(3)}>
-                                    <span className="fa fa-angle-right" />
+                                <div className={isActive.key == 3 ? "dropdown-btn open" : "dropdown-btn"}
+                                     onClick={() => handleToggle(3)}>
+                                    <span className="fa fa-angle-right"/>
                                 </div>
                             </li>
-                            
-                            
-                            
+
+
                             <li className={isActive.key == 4 ? "dropdown current" : "dropdown"}>
                                 <Link href="/#" onClick={handleMobileMenu}>Info</Link>
-                                <ul style={{ display: `${isActive.key == 4 ? "block" : "none"}` }}>
-                                    <li><Link href="/about" onClick={handleMobileMenu}>Rreth nesh</Link></li>
+                                <ul style={{display: `${isActive.key == 4 ? "block" : "none"}`}}>
                                     <li><Link href="/history" onClick={handleMobileMenu}>Histori</Link></li>
                                 </ul>
-                                <div className={isActive.key == 4 ? "dropdown-btn open" : "dropdown-btn"} onClick={() => handleToggle(4)}>
-                                    <span className="fa fa-angle-right" />
+                                <div className={isActive.key == 4 ? "dropdown-btn open" : "dropdown-btn"}
+                                     onClick={() => handleToggle(4)}>
+                                    <span className="fa fa-angle-right"/>
                                 </div>
                             </li>
                             <li className={isActive.key == 5 ? "dropdown current" : "dropdown"}>
                                 <Link href="/#" onClick={handleMobileMenu}>Shërbime</Link>
-                                <ul style={{ display: `${isActive.key == 5 ? "block" : "none"}` }}>
+                                <ul style={{display: `${isActive.key == 5 ? "block" : "none"}`}}>
                                     <li><Link href="/services" onClick={handleMobileMenu}>Services</Link></li>
-                                    <li><Link href="/departments-1" onClick={handleMobileMenu}>Departments One</Link></li>
-                                    <li><Link href="/departments-2" onClick={handleMobileMenu}>Departments Two</Link></li>
-                                    <li><Link href="/departments-details" onClick={handleMobileMenu}>Departments Details</Link></li>
-                                </ul>
-                                <div className={isActive.key == 5 ? "dropdown-btn open" : "dropdown-btn"} onClick={() => handleToggle(5)}>
-                                    <span className="fa fa-angle-right" />
-                                </div>
-                            </li>
-                            <li className={isActive.key == 6 ? "dropdown current" : "dropdown"}>
-                                <Link href="/#" onClick={handleMobileMenu}>Faqet</Link>
-                                <ul style={{ display: `${isActive.key == 6 ? "block" : "none"}` }}>
+                                    <li><Link href="/departments-1" onClick={handleMobileMenu}>Departments One</Link>
+                                    </li>
+                                    <li><Link href="/departments-2" onClick={handleMobileMenu}>Departments Two</Link>
+                                    </li>
+                                    <li><Link href="/departments-details" onClick={handleMobileMenu}>Departments
+                                        Details</Link></li>
                                     <li><Link href="/testimonials" onClick={handleMobileMenu}>Testimonials</Link></li>
                                     <li><Link href="/faq" onClick={handleMobileMenu}>Faq</Link></li>
-                                    <li><Link href="/portfolio-grid" onClick={handleMobileMenu}>Portfolio One</Link></li>
-                                    <li><Link href="/portfolio-masonry" onClick={handleMobileMenu}>Portfolio Two</Link></li>
+                                    <li><Link href="/portfolio-grid" onClick={handleMobileMenu}>Portfolio One</Link>
+                                    </li>
+                                    <li><Link href="/portfolio-masonry" onClick={handleMobileMenu}>Portfolio Two</Link>
+                                    </li>
                                     <li><Link href="/team-1" onClick={handleMobileMenu}>Team One</Link></li>
                                     <li><Link href="/team-2" onClick={handleMobileMenu}>Team Two</Link></li>
                                     <li><Link href="/team-details" onClick={handleMobileMenu}>Team Details</Link></li>
-                                    <li><Link href="/events-1" onClick={handleMobileMenu}>Events One</Link></li>
-                                    <li><Link href="/events-2" onClick={handleMobileMenu}>Events Two</Link></li>
-                                    <li><Link href="/event-details" onClick={handleMobileMenu}>Event Details</Link></li>
                                 </ul>
-                                <div className={isActive.key == 6 ? "dropdown-btn open" : "dropdown-btn"} onClick={() => handleToggle(6)}>
-                                    <span className="fa fa-angle-right" />
+                                <div className={isActive.key == 5 ? "dropdown-btn open" : "dropdown-btn"}
+                                     onClick={() => handleToggle(5)}>
+                                    <span className="fa fa-angle-right"/>
                                 </div>
                             </li>
+                            <li className={isActive.key == 6 ? "dropdown current" : "dropdown"}>
+                                <Link href="/events" onClick={handleMobileMenu}>Evente</Link>
+                            </li>
                             <li className={isActive.key == 7 ? "dropdown current" : "dropdown"}>
-                                <Link href="/#" onClick={handleMobileMenu}>Lajme</Link>
-                                <ul style={{ display: `${isActive.key == 7 ? "block" : "none"}` }}>
-                                    <li><Link href="/blog" onClick={handleMobileMenu}>News Grid</Link></li>
-                                    <li><Link href="/blog-2" onClick={handleMobileMenu}>News Standard</Link></li>
-                                    <li><Link href="/blog-details" onClick={handleMobileMenu}>Blog Details</Link></li>
-                                </ul>
-                                <div className={isActive.key == 7 ? "dropdown-btn open" : "dropdown-btn"} onClick={() => handleToggle(7)}>
-                                    <span className="fa fa-angle-right" />
-                                </div>
+                                <Link href="/news" onClick={handleMobileMenu}>Lajme</Link>
                             </li>
                             <li><Link href="/contact" onClick={handleMobileMenu}>Kontakt</Link></li>
                             <li><NavbarAuthIcon/></li>
+                            <li><NavbarChatIcon/></li>
                         </ul>
-
-
-
-
 
 
                     </div>
@@ -209,16 +207,22 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                         {user ? (
                             <li>
                                 <button onClick={logoutUser} className="navbar-auth__link">
-                                    <LogOut size={25} />
+                                    <LogOut size={25}/>
                                 </button>
                             </li>
                         ) : (
                             <li>
                                 <Link href="/login" className="navbar-auth__link" style={{marginTop: "10px"}}>
-                                    <UserCircle size={25} style={{marginTop: "10px"}} />
+                                    <UserCircle size={25} style={{marginTop: "10px"}}/>
                                 </Link>
                             </li>
                         )}
+                        <li>
+                            <Link href="/virtual-assistant" className="navbar-auth__link"
+                                  style={{marginTop: "10px", marginRight: "-20px"}}>
+                                <Icon icon="mdi:robot-happy" width="25" height="25" style={{marginTop: "10px"}}/>
+                            </Link>
+                        </li>
                         <li>
                             <i className="fa fa-envelope"></i>
                             <a href="mailto:pllumbiklevis1@gmail.com">info@klosismart.com</a>

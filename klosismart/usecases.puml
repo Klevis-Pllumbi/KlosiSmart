@@ -1,0 +1,79 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam actorStyle awesome
+skinparam usecase {
+  BorderColor #444
+  BackgroundColor #F9F9F9
+}
+title Use Case Diagram – Paketuar sipas moduleve
+
+left to right direction
+
+actor "USER" as U
+actor "ADMIN" as A
+
+rectangle {
+
+  package "Evente" {
+    (Shiko evente + pagination + detaje) as UC_E_USER
+    (CRUD evente + agjendë + të ftuar + media) as UC_E_ADMIN
+  }
+
+  package "Lajme" {
+    (Shiko lajme + kërkim/filtrim tags) as UC_N_USER
+    (CRUD lajme + media) as UC_N_ADMIN
+  }
+
+  package "Pyetësorë (AI)" {
+    (Plotëso pyetësor aktiv) as UC_S_USER
+    (CRUD pyetësorë + gjenerim AI + rezultate grafike) as UC_S_ADMIN
+  }
+
+  package "Raportime / Kërkesa" {
+    (Krijo raportim + hartë + media) as UC_R_USER
+    (Menaxho raportime: pamje hartë + status + email) as UC_R_ADMIN
+  }
+
+  package "Asistent Virtual" {
+    (Bisedo me Asistentin Virtual) as UC_V_USER
+  }
+
+  package "Subscribe" {
+    (Subscribe / Unsubscribe) as UC_B_USER
+    (Menaxho subscribers + raport) as UC_B_ADMIN
+  }
+
+  package "Contact" {
+    (Dërgo mesazh kontakt) as UC_C_USER
+    (Përgjigju kontaktit me email) as UC_C_ADMIN
+  }
+
+  package "Autentifikim & Autorizim" {
+    (Login / Logout) as UC_AU_COMMON
+    (RBAC & autorizim role-based) as UC_AU_ADMIN
+  }
+}
+
+' ------------------------------
+' Lidhjet USER → funksionalitete
+U --> UC_E_USER
+U --> UC_N_USER
+U --> UC_S_USER
+U --> UC_R_USER
+U --> UC_V_USER
+U --> UC_B_USER
+U --> UC_C_USER
+U --> UC_AU_COMMON
+
+' ------------------------------
+' Lidhjet ADMIN → funksionalitete
+A --> UC_E_ADMIN
+A --> UC_N_ADMIN
+A --> UC_S_ADMIN
+A --> UC_R_ADMIN
+A --> UC_B_ADMIN
+A --> UC_C_ADMIN
+A --> UC_AU_COMMON
+A --> UC_AU_ADMIN
+
+@enduml

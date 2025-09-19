@@ -9,6 +9,8 @@ import "swiper/css/pagination"
 import 'swiper/css/free-mode';
 import { DM_sans, poppins } from '@/lib/font'
 import {AuthProvider} from "@/context/AuthContext";
+import Providers from "@/app/Providers";
+import {PreloaderProvider} from "@/components/elements/PreloaderProvider";
 
 export const metadata = {
     title: 'KlosiSmart',
@@ -19,9 +21,10 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${poppins.variable} ${DM_sans.variable}`}>
             <body>
-                <AuthProvider>
+                <PreloaderProvider />
+                <Providers>
                     {children}
-                </AuthProvider>
+                </Providers>
             </body>
         </html>
     )

@@ -104,6 +104,7 @@ const SurveyListLayer = () => {
                     data: surveys.map(survey => createRowHtml(survey)),
                     pageLength: 10,
                     destroy: true,
+                    scrollX: true,
                     language: {
                         search: "Kërko:",
                         lengthMenu: "Shfaq _MENU_ rreshta",
