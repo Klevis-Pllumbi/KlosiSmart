@@ -16,14 +16,12 @@ export default function Menu() {
                 {/*<li className="dropdown megamenu">*/}
                 <li>
                     <Link href="/">Kreu </Link>
-
                 </li>
                 <li className="dropdown">
                     <Link href="#">Info</Link>
                     <ul>
                         <li><Link href="/history">Histori</Link></li>
                         <li><Link href="/faq">FAQ</Link></li>
-                        <li><Link href="/portfolio-grid">Galeria turistike</Link></li>
                     </ul>
                 </li>
                 <li>
@@ -34,12 +32,6 @@ export default function Menu() {
                 </li>
                 <li>
                     <Link href="/surveys">Pyetësor</Link>
-                    {/*<ul>*/}
-                    {/*    <li><Link href="/services">Jepni opinionin tuaj</Link></li>*/}
-                    {/*    <li><Link href="/departments-1">Pyesi asistentin virtual</Link></li>*/}
-                    {/*    <li><Link href="/departments-2">Departments Two</Link></li>*/}
-                    {/*    <li><Link href="/departments-details">Departments Details</Link></li>*/}
-                    {/*</ul>*/}
                 </li>
                 <li>
                     <Link href="/contact">Kontakt</Link>

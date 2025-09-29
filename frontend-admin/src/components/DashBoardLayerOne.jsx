@@ -6,6 +6,7 @@ import TopPerformerOne from "./child/TopPerformerOne";
 import TotalSubscriberOne from "./child/TotalSubscriberOne";
 import UnitCountOne from "./child/UnitCountOne";
 import UsersOverviewOne from "./child/UsersOverviewOne";
+import RequestMapLayer from "@/components/RequestMapLayer";
 
 const DashBoardLayerOne = () => {
   return (
@@ -17,23 +18,10 @@ const DashBoardLayerOne = () => {
         {/* SalesStatisticOne */}
         <SalesStatisticOne />
 
-        {/* TotalSubscriberOne */}
-        <TotalSubscriberOne />
-
         {/* UsersOverviewOne */}
         <UsersOverviewOne />
 
-        {/* LatestRegisteredOne */}
-        <LatestRegisteredOne />
-
-        {/* TopPerformerOne */}
-        <TopPerformerOne />
-
-        {/* TopCountries */}
-        <TopCountries />
-
-        {/* GeneratedContent */}
-        <GeneratedContent />
+        <RequestMapLayer />
       </section>
     </>
   );

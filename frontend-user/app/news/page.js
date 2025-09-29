@@ -3,6 +3,7 @@ import Layout from "@/components/layout/Layout";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import Newsletter from "@/components/sections/home2/Newsletter";
 
 // Helper: absolute URL for media served as /api/guest/files/news/<file>
 function asAbs(url) {
@@ -261,41 +262,7 @@ export default function NewsListPage() {
                     </div>
                 </section>
 
-                <section className="newsletter-style1">
-                    <div className="auto-container">
-                        <div className="row">
-                            <div className="col-xl-4">
-                                <div className="newsletter-style1__title">
-                                    <h2>Subscribe To Our <br /> Newsletter</h2>
-                                </div>
-                            </div>
-                            <div className="col-xl-8">
-                                <div className="newsletter-style1__form">
-                                    <form action="/" className="comment-one__form contact-form-validated" >
-                                        <div className="newsletter-style1__form-inner">
-                                            <ul>
-                                                <li>
-                                                    <div className="comment-form__input-box">
-                                                        <input type="text" placeholder="Your name" name="name" />
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="comment-form__input-box">
-                                                        <input type="email" placeholder="Your email" name="email" />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div className="newsletter-style1__form-btn">
-                                                <button type="submit" className="btn-one newsletter-style1__form-btn">
-                                                    <span className="txt">Subscribe Now</span></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <Newsletter />
             </div>
         </Layout>
     );

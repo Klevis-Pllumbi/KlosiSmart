@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import Link from "next/link";
 import axios from "axios";
+import Newsletter from "@/components/sections/home2/Newsletter";
 
 const API_BASE = "http://localhost:8080";
 const GUEST_EVENTS = `${API_BASE}/api/guest/events`;
@@ -348,61 +349,7 @@ export default function EventsPage() {
                 </section>
                 {/*End Events-style2 */}
 
-                {/* Newsletter (në shqip) */}
-                <section className="newsletter-style1">
-                    <div className="auto-container">
-                        <div className="row">
-                            <div className="col-xl-4">
-                                <div className="newsletter-style1__title">
-                                    <h2>
-                                        Abonohu në <br /> Buletinin tonë
-                                    </h2>
-                                </div>
-                            </div>
-
-                            <div className="col-xl-8">
-                                <div className="newsletter-style1__form">
-                                    <form
-                                        action=""
-                                        className="comment-one__form contact-form-validated"
-                                    >
-                                        <div className="newsletter-style1__form-inner">
-                                            <ul>
-                                                <li>
-                                                    <div className="comment-form__input-box">
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Emri juaj"
-                                                            name="name"
-                                                        />
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="comment-form__input-box">
-                                                        <input
-                                                            type="email"
-                                                            placeholder="Email-i juaj"
-                                                            name="email"
-                                                        />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div className="newsletter-style1__form-btn">
-                                                <button
-                                                    type="submit"
-                                                    className="btn-one newsletter-style1__form-btn"
-                                                >
-                                                    <span className="txt">Abonohu tani</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            {/*End Newsletter Style1 Form */}
-                        </div>
-                    </div>
-                </section>
+                <Newsletter />
             </div>
         </Layout>
     );

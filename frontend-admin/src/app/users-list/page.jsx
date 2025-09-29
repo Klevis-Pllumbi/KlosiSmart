@@ -1,24 +1,25 @@
 import Breadcrumb from "@/components/Breadcrumb";
 import UsersListLayer from "@/components/UsersListLayer";
 import MasterLayout from "@/masterLayout/MasterLayout";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export const metadata = {
-  title: "WowDash NEXT JS - Admin Dashboard Multipurpose Bootstrap 5 Template",
-  description:
-    "Wowdash NEXT JS is a developer-friendly, ready-to-use admin template designed for building attractive, scalable, and high-performing web applications.",
+  title: "Përdoruesit | KlosiSmart",
 };
 
 const Page = () => {
   return (
     <>
-      {/* MasterLayout */}
-      <MasterLayout>
-        {/* Breadcrumb */}
-        <Breadcrumb title='Users Grid' />
+        <ProtectedRoute role="ROLE_ADMIN">
+            {/* MasterLayout */}
+            <MasterLayout>
+                {/* Breadcrumb */}
+                <Breadcrumb title='Përdoruesit' />
 
-        {/* UsersListLayer */}
-        <UsersListLayer />
-      </MasterLayout>
+                {/* UsersListLayer */}
+                <UsersListLayer />
+            </MasterLayout>
+        </ProtectedRoute>
     </>
   );
 };

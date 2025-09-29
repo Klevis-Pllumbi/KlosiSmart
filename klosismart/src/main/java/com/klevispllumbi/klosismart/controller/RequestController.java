@@ -2,6 +2,8 @@ package com.klevispllumbi.klosismart.controller;
 
 import com.klevispllumbi.klosismart.dto.RequestCreateDto;
 import com.klevispllumbi.klosismart.dto.RequestDto;
+import com.klevispllumbi.klosismart.dto.StatusBreakdownDto;
+import com.klevispllumbi.klosismart.dto.TimeSeriesDto;
 import com.klevispllumbi.klosismart.model.RequestStatus;
 import com.klevispllumbi.klosismart.model.User;
 import com.klevispllumbi.klosismart.service.RequestService;
@@ -54,6 +56,18 @@ public class RequestController {
 
         RequestDto updatedRequest = requestService.updateRequestStatus(id, statusStr);
         return ResponseEntity.ok(updatedRequest);
+    }
+
+    @GetMapping("/admin/stats/requests")
+    public ResponseEntity<TimeSeriesDto> getSeries(@RequestParam(defaultValue = "Monthly") String range,
+                                                   @RequestParam(required = false) String tz) {
+        return ResponseEntity.ok(requestService.getRequestsSeries(range, tz));
+    }
+
+    @GetMapping("/admin/stats/requests/status")
+    public ResponseEntity<StatusBreakdownDto> get(@RequestParam(defaultValue = "Monthly") String range,
+                                                  @RequestParam(required = false) String tz) {
+        return ResponseEntity.ok(requestService.getStatusBreakdown(range, tz));
     }
 
 }

@@ -1,4 +1,4 @@
-// EventPerson.java
+
 package com.klevispllumbi.klosismart.model;
 
 import jakarta.persistence.*;

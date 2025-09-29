@@ -650,7 +650,7 @@ const MasterLayout = ({ children }) => {
                     icon='flowbite:users-group-outline'
                     className='menu-icon'
                 />
-                <span>Users</span>
+                <span>Përdoruesit</span>
               </Link>
               <ul className='sidebar-submenu'>
                 <li>
@@ -659,94 +659,38 @@ const MasterLayout = ({ children }) => {
                       className={pathname === "/users-list" ? "active-page" : ""}
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto'/>{" "}
-                    Users List
+                    Lista
                   </Link>
                 </li>
-                <li>
-                  <Link
-                      href='/users-grid'
-                      className={pathname === "/users-grid" ? "active-page" : ""}
-                  >
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto'/>{" "}
-                    Users Grid
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                      href='/add-user'
-                      className={pathname === "/add-user" ? "active-page" : ""}
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto'/>{" "}
-                    Add User
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                      href='/view-profile'
-                      className={
-                        pathname === "/view-profile" ? "active-page" : ""
-                      }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto'/>{" "}
-                    View Profile
-                  </Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className='sidebar-menu-group-title'>Application</li>
-
-            <li className='dropdown'>
-              <Link href='#'>
-                <Icon
-                    icon='flowbite:users-group-outline'
-                    className='menu-icon'
-                />
-                <span>Gallery</span>
-              </Link>
-              <ul className='sidebar-submenu'>
-                <li>
-                  <Link
-                      href='/gallery-grid'
-                      className={
-                        pathname === "/gallery-grid" ? "active-page" : ""
-                      }
-                  >
-                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto'/>{" "}
-                    Gallery Grid
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                      href='/gallery'
-                      className={pathname === "/gallery" ? "active-page" : ""}
-                  >
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto'/>{" "}
-                    Gallery Grid Desc
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                      href='/gallery-masonry'
-                      className={
-                        pathname === "/gallery-masonry" ? "active-page" : ""
-                      }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto'/>{" "}
-                    Gallery Grid
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                      href='/gallery-hover'
-                      className={
-                        pathname === "/gallery-hover" ? "active-page" : ""
-                      }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto'/>{" "}
-                    Gallery Hover Effect
-                  </Link>
-                </li>
+                {/*<li>*/}
+                {/*  <Link*/}
+                {/*      href='/users-grid'*/}
+                {/*      className={pathname === "/users-grid" ? "active-page" : ""}*/}
+                {/*  >*/}
+                {/*    <i className='ri-circle-fill circle-icon text-warning-main w-auto'/>{" "}*/}
+                {/*    Users Grid*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                {/*  <Link*/}
+                {/*      href='/add-user'*/}
+                {/*      className={pathname === "/add-user" ? "active-page" : ""}*/}
+                {/*  >*/}
+                {/*    <i className='ri-circle-fill circle-icon text-info-main w-auto'/>{" "}*/}
+                {/*    Add User*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                {/*  <Link*/}
+                {/*      href='/view-profile'*/}
+                {/*      className={*/}
+                {/*        pathname === "/view-profile" ? "active-page" : ""*/}
+                {/*      }*/}
+                {/*  >*/}
+                {/*    <i className='ri-circle-fill circle-icon text-danger-main w-auto'/>{" "}*/}
+                {/*    View Profile*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
               </ul>
             </li>
 

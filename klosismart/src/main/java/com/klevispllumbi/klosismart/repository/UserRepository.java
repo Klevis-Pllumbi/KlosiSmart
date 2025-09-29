@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -16,4 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             message = "NID duhet të fillojë dhe të përfundojë me një shkronjë të madhe dhe të ketë 8 numra në mes"
     ) String nid);
     Optional<User> findByForgotPasswordToken(String token);
+    long count();
+    long countByIsSubscribedTrue();
+    long countByEnabledTrue();
+    List<User> findAllByIsSubscribedTrue();
 }

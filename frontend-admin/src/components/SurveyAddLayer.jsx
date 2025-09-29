@@ -241,7 +241,6 @@ const SurveyAddLayer = ({ initialData }) => {
             if (imageFile) formData.append("file", imageFile);
 
             if (initialData?.id) {
-                // EDIT: PUT
 
                 await axios.put(
                     `http://localhost:8080/api/admin/surveys/${initialData.id}`,
@@ -273,6 +272,7 @@ const SurveyAddLayer = ({ initialData }) => {
             if (Array.isArray(data)) data.forEach(msg => addAlert("error", "Gabim", msg));
             else if (Array.isArray(data?.errors)) data.errors.forEach(msg => addAlert("error", "Gabim", msg));
             else if (data?.message) addAlert("error", "Gabim", data.message);
+            else if (data?.error) addAlert("warning", "Kujdes", data.error);
             else addAlert("error", "Gabim", "Ndodhi një gabim gjatë ruajtjes së pyetësorit.");
         }
     };

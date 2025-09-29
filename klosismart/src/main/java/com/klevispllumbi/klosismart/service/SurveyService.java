@@ -7,6 +7,9 @@ import com.klevispllumbi.klosismart.model.Option;
 import com.klevispllumbi.klosismart.model.Question;
 import com.klevispllumbi.klosismart.model.Survey;
 import com.klevispllumbi.klosismart.model.SurveyStatus;
+import com.klevispllumbi.klosismart.notifications.dto.BroadcastPayload;
+import com.klevispllumbi.klosismart.notifications.outbox.OutboxService;
+import com.klevispllumbi.klosismart.repository.AnswerRepository;
 import com.klevispllumbi.klosismart.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +27,8 @@ public class SurveyService {
 
     private final SurveyRepository surveyRepository;
     private final FileStorageService fileStorageService;
+    private final AnswerRepository answerRepository;
+    private final OutboxService outboxService;
 
     public SurveyDto createSurvey(SurveyDto surveyDto, MultipartFile file) {
         Survey survey = new Survey();
@@ -58,7 +64,17 @@ public class SurveyService {
                 }).collect(Collectors.toList())
         );
 
-        surveyRepository.save(survey);
+        Survey saved = surveyRepository.save(survey);
+
+        var payload = BroadcastPayload.builder()
+                .template("broadcast-email")
+                .subject("📣 Pyetësor i ri: " + saved.getTitle())
+                .message(saved.getDescription())
+                .buttonText("Lexo më shumë")
+                .buttonUrl(("http://localhost:3000/surveys/" + saved.getId()))
+                .build();
+        outboxService.enqueue("SURVEYS_CREATED", payload);
+
         return mapToDto(survey);
     }
 
@@ -114,6 +130,7 @@ public class SurveyService {
 
     @Transactional
     public SurveyDto updateSurvey(Long id, SurveyDto surveyDto, MultipartFile file) {
+        // LAZY-safe because we are inside a transaction
         Survey survey = surveyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pyetësori nuk u gjet"));
 
@@ -122,34 +139,101 @@ public class SurveyService {
         survey.setEndDate(surveyDto.endDate());
         survey.setStatus(surveyDto.status());
 
-        // Vetëm nëse vjen file i ri, përpunojmë imazhin dhe e vendosim url-në
         if (file != null && !file.isEmpty()) {
             String existingImageUrl = survey.getImageUrl();
             fileStorageService.deleteSurveyImage(existingImageUrl);
-            // Ruaj imazhin në disk ose cloud dhe merr URL-në e re
-            String newImageUrl = fileStorageService.saveSurveyImage(file); // ose metoda që ke
+            String newImageUrl = fileStorageService.saveSurveyImage(file);
             survey.setImageUrl(newImageUrl);
         }
-        // Nëse nuk ka file të ri, mbajmë URL ekzistuese
 
-        survey.getQuestions().clear();
-        surveyDto.questions().forEach(questionDto -> {
-            Question question = new Question();
-            question.setText(questionDto.text());
-            question.setType(questionDto.type());
-            question.setSurvey(survey);
+        // Build map of existing questions (LAZY collection; safe in TX)
+        Map<Long, Question> existingQ = survey.getQuestions().stream()
+                .filter(q -> q.getId() != null)
+                .collect(Collectors.toMap(Question::getId, Function.identity()));
 
-            questionDto.options().forEach(optionDto -> {
-                Option option = new Option();
-                option.setText(optionDto.text());
-                option.setQuestion(question);
-                question.getOptions().add(option);
-            });
+        Set<Long> seenQuestionIds = new HashSet<>();
 
-            survey.getQuestions().add(question);
-        });
+        for (QuestionDto qd : surveyDto.questions()) {
+            if (qd.id() != null && existingQ.containsKey(qd.id())) {
+                // update existing
+                Question q = existingQ.get(qd.id());
+                boolean hasAnswers = answerRepository.existsByQuestionId(q.getId());
 
-        Survey updated = surveyRepository.save(survey);
-        return mapToDto(updated);
+                if (hasAnswers && q.getType() != qd.type()) {
+                    throw new IllegalStateException("Nuk lejohet të ndryshohet tipi i pyetjes pasi ka përgjigje.");
+                }
+
+                q.setText(qd.text());
+                if (!hasAnswers) q.setType(qd.type());
+
+                // Touch q.getOptions() during reconcile; with SUBSELECT this will bulk-load them
+                reconcileOptions(q, qd, hasAnswers);
+                seenQuestionIds.add(q.getId());
+            } else {
+                // new question
+                Question q = new Question();
+                q.setSurvey(survey);
+                q.setText(qd.text());
+                q.setType(qd.type());
+                q.setOptions(new ArrayList<>());
+
+                for (OptionDto od : qd.options()) {
+                    Option o = new Option();
+                    o.setQuestion(q);
+                    o.setText(od.text());
+                    q.getOptions().add(o);
+                }
+                survey.getQuestions().add(q);
+            }
+        }
+
+        // Remove questions absent from DTO (only if no answers)
+        List<Question> toCheckDelete = new ArrayList<>(survey.getQuestions());
+        for (Question q : toCheckDelete) {
+            if (q.getId() != null && !seenQuestionIds.contains(q.getId())) {
+                if (answerRepository.existsByQuestionId(q.getId())) {
+                    throw new RuntimeException("Nuk lejohet fshirja e pyetjes pasi ka përgjigje.");
+                }
+                survey.getQuestions().remove(q);
+            }
+        }
+
+        Survey saved = surveyRepository.save(survey);
+        return mapToDto(saved);
     }
+
+    private void reconcileOptions(Question q, QuestionDto qd, boolean hasAnswers) {
+        // q.getOptions() is LAZY; within TX + SUBSELECT/BatchSize it will be efficient
+        Map<Long, Option> existingO = q.getOptions().stream()
+                .filter(o -> o.getId() != null)
+                .collect(Collectors.toMap(Option::getId, Function.identity()));
+
+        Set<Long> seenOptionIds = new HashSet<>();
+
+        for (OptionDto od : qd.options()) {
+            if (od.id() != null && existingO.containsKey(od.id())) {
+                Option o = existingO.get(od.id());
+                o.setText(od.text());
+                seenOptionIds.add(o.getId());
+            } else {
+                Option o = new Option();
+                o.setQuestion(q);
+                o.setText(od.text());
+                q.getOptions().add(o);
+            }
+        }
+
+        List<Option> toCheckDelete = new ArrayList<>(q.getOptions());
+        for (Option o : toCheckDelete) {
+            if (o.getId() != null && !seenOptionIds.contains(o.getId())) {
+                if (hasAnswers && answerRepository
+                        .existsByQuestionIdAndSelectedOptionId(q.getId(), o.getId())) {
+                    throw new IllegalStateException("Nuk mund të fshihet një alternativë që është zgjedhur nga përdoruesit.");
+                }
+                q.getOptions().remove(o);
+            }
+        }
+    }
+
+
 }

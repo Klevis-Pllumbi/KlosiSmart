@@ -5,6 +5,8 @@ import com.klevispllumbi.klosismart.model.News;
 import com.klevispllumbi.klosismart.model.NewsDocument;
 import com.klevispllumbi.klosismart.model.NewsImage;
 import com.klevispllumbi.klosismart.model.Tag;
+import com.klevispllumbi.klosismart.notifications.dto.BroadcastPayload;
+import com.klevispllumbi.klosismart.notifications.outbox.OutboxService;
 import com.klevispllumbi.klosismart.repository.NewsDocumentRepository;
 import com.klevispllumbi.klosismart.repository.NewsImageRepository;
 import com.klevispllumbi.klosismart.repository.NewsRepository;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.*;
 import java.text.Normalizer;
 import java.util.*;
@@ -32,15 +35,17 @@ public class NewsService {
     private final NewsRepository newsRepository;
     private final NewsImageRepository imageRepository;
     private final NewsDocumentRepository documentRepository;
+    private final OutboxService outboxService;
 
     private final String uploadDir = "uploads/news/";
 
     public NewsService(NewsRepository newsRepository,
                        NewsImageRepository imageRepository,
-                       NewsDocumentRepository documentRepository) {
+                       NewsDocumentRepository documentRepository, OutboxService outboxService) {
         this.newsRepository = newsRepository;
         this.imageRepository = imageRepository;
         this.documentRepository = documentRepository;
+        this.outboxService = outboxService;
     }
 
     public Page<NewsDto> getAllNews(int page, int size, @Nullable String q, @Nullable String tag) {
@@ -83,7 +88,7 @@ public class NewsService {
         String t = tag.trim();
         if (t.isEmpty()) return null;
         try {
-            return Tag.valueOf(t.toUpperCase(java.util.Locale.ROOT));
+            return Tag.valueOf(t.toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException ex) {
             return null; // tag i panjohur -> injoro filtrin
         }
@@ -146,6 +151,15 @@ public class NewsService {
         News saved = newsRepository.save(news);
         documentRepository.saveAll(newsDocuments);
         imageRepository.saveAll(newsImages);
+
+        var payload = BroadcastPayload.builder()
+                .template("broadcast-email")
+                .subject("📣 Lajm i ri: " + saved.getTitle())
+                .message(saved.getSummary())
+                .buttonText("Lexo më shumë")
+                .buttonUrl(("http://localhost:3000/news/" + saved.getSlug()))
+                .build();
+        outboxService.enqueue("NEWS_CREATED", payload);
 
         return convertToDto(saved);
     }
@@ -262,7 +276,7 @@ public class NewsService {
         // 2) Fshi IMAGES (skedar + rreshtat)
         if (news.getImages() != null && !news.getImages().isEmpty()) {
             // ruaj një kopje për të shmangur ConcurrentModification
-            var imagesCopy = new java.util.ArrayList<>(news.getImages());
+            var imagesCopy = new ArrayList<>(news.getImages());
             for (var img : imagesCopy) {
                 deletePhysicalFileIfExists(img.getFilePath());
                 if (img.getId() != null) {
@@ -274,7 +288,7 @@ public class NewsService {
 
         // 3) Fshi DOCUMENTS (skedar + rreshtat)
         if (news.getDocuments() != null && !news.getDocuments().isEmpty()) {
-            var docsCopy = new java.util.ArrayList<>(news.getDocuments());
+            var docsCopy = new ArrayList<>(news.getDocuments());
             for (var doc : docsCopy) {
                 deletePhysicalFileIfExists(doc.getFilePath());
                 if (doc.getId() != null) {
@@ -347,7 +361,7 @@ public class NewsService {
     private String toRelativeApiPath(String any) {
         // Kthen gjithmonë diçka si: /api/guest/files/news/<filename>
         try {
-            java.net.URI uri = java.net.URI.create(any);
+            URI uri = URI.create(any);
             String p = uri.getPath(); // p.sh. "/api/guest/files/news/abc.jpg"
             String marker = "/api/guest/files/news/";
             int idx = p.indexOf(marker);

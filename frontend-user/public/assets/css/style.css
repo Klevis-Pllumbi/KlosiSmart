@@ -2690,8 +2690,17 @@ Portfolio Style1
 
 .portfolio-style1__single-img .inner img {
   width: 100%;
+  height: auto;
+  object-fit: cover;
   transition: all 500ms ease;
   transform: scale(1);
+}
+
+.timeline-img {
+  width: 100%;           /* e shtrin sipas gjerësisë së kolonës */
+  height: 300px;         /* e bën të gjitha me të njëjtën lartësi */
+  object-fit: cover;     /* e pret imazhin bukur, pa deformim */
+  border-radius: 10px;   /* opsionale – për pamje më elegante */
 }
 
 .portfolio-style1__single:hover .portfolio-style1__single-img .inner img {

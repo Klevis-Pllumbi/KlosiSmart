@@ -3,6 +3,8 @@ package com.klevispllumbi.klosismart.service;
 
 import com.klevispllumbi.klosismart.dto.*;
 import com.klevispllumbi.klosismart.model.*;
+import com.klevispllumbi.klosismart.notifications.dto.BroadcastPayload;
+import com.klevispllumbi.klosismart.notifications.outbox.OutboxService;
 import com.klevispllumbi.klosismart.repository.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -28,6 +30,7 @@ public class EventService {
     private final EventDocumentRepository documentRepository;
     private final EventPersonRepository personRepository;
     private final EventActionRepository actionRepository;
+    private final OutboxService outboxService;
 
     private final String uploadDir = "uploads/events/";
 
@@ -35,12 +38,13 @@ public class EventService {
                         EventImageRepository imageRepository,
                         EventDocumentRepository documentRepository,
                         EventPersonRepository personRepository,
-                        EventActionRepository actionRepository) {
+                        EventActionRepository actionRepository, OutboxService outboxService) {
         this.eventRepository = eventRepository;
         this.imageRepository = imageRepository;
         this.documentRepository = documentRepository;
         this.personRepository = personRepository;
         this.actionRepository = actionRepository;
+        this.outboxService = outboxService;
     }
 
     // LIST with optional search ?q=
@@ -172,6 +176,16 @@ public class EventService {
         }
 
         Event saved = eventRepository.save(ev);
+
+        var payload = BroadcastPayload.builder()
+                .template("broadcast-email")
+                .subject("📣 Event i ri: " + saved.getTitle())
+                .message(saved.getSummary())
+                .buttonText("Lexo më shumë")
+                .buttonUrl(("http://localhost:3000/events/" + saved.getSlug()))
+                .build();
+        outboxService.enqueue("EVENTS_CREATED", payload);
+
         return toDto(saved);
     }
 

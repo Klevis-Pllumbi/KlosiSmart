@@ -16,7 +16,7 @@ const Page = () => {
           {/* MasterLayout */}
           <MasterLayout>
               {/* Breadcrumb */}
-              <Breadcrumb title='AI' />
+              <Breadcrumb title='Faqja Kryesore' />
 
               {/* DashBoardLayerOne */}
               <DashBoardLayerOne />

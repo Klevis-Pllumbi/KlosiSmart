@@ -55,33 +55,60 @@ export default function News() {
 
                     <div className="row">
                         {!loading && !error && items.map((n, i) => (
-                            <div key={n.id} className={`col-xl-4 col-lg-4 wow ${i % 2 === 0 ? "fadeInUp" : "fadeInDown"}`} data-wow-delay=".3s">
+                            <div
+                                key={n.id}
+                                className={`col-xl-4 col-lg-4 wow ${i % 2 === 0 ? "fadeInUp" : "fadeInDown"}`}
+                                data-wow-delay=".3s"
+                            >
                                 <div className="blog-style1__single">
                                     <div className="blog-style1__single-img">
                                         <Link href={`/news/${n.slug}`}>
                                             <img
                                                 src={n.mainImageUrl ? asAbs(n.mainImageUrl) : "assets/images/blog/blog-v1-1.jpg"}
                                                 alt={n.title}
-                                                style={{ width: "100%", height: 260, objectFit: "cover" }}
+                                                style={{width: "100%", height: 260, objectFit: "cover"}}
                                             />
                                         </Link>
                                     </div>
 
                                     <div className="blog-style1__single-content">
                                         <div className="date-box">
-                                            <p><span className="icon-calendar"></span> {n.createdAt ? new Date(n.createdAt).toLocaleDateString() : ""}</p>
+                                            <p>
+                                                <span className="icon-calendar"></span>{" "}
+                                                {n.createdAt ? new Date(n.createdAt).toLocaleDateString() : ""}
+                                            </p>
                                         </div>
-                                        <h2>
-                                            <Link href={`/news/${n.slug}`}>{n.title}</Link>
-                                        </h2>
-                                        <div className="text">
-                                            <p style={{
+
+                                        {/* Titulli – gjithmonë 2 rreshta */}
+                                        <h2
+                                            style={{
                                                 display: "-webkit-box",
-                                                WebkitLineClamp: 3,
+                                                WebkitLineClamp: 2,
                                                 WebkitBoxOrient: "vertical",
                                                 overflow: "hidden",
-                                            }}>{n.summary}</p>
+                                                minHeight: "3em", // 2 rreshta * line-height ~1.5em
+                                                lineHeight: "1.5em",
+                                            }}
+                                        >
+                                            <Link href={`/news/${n.slug}`}>{n.title}</Link>
+                                        </h2>
+
+                                        {/* Summary – gjithmonë 3 rreshta */}
+                                        <div className="text">
+                                            <p
+                                                style={{
+                                                    display: "-webkit-box",
+                                                    WebkitLineClamp: 3,
+                                                    WebkitBoxOrient: "vertical",
+                                                    overflow: "hidden",
+                                                    minHeight: "4.5em", // 3 rreshta * line-height ~1.5em
+                                                    lineHeight: "1.5em",
+                                                }}
+                                            >
+                                                {n.summary}
+                                            </p>
                                         </div>
+
                                         <div className="blog-style1__single-conten-btn">
                                             <Link className="btn-one" href={`/news/${n.slug}`}>
                                                 <span className="txt">Lexo më shumë</span>
@@ -93,8 +120,9 @@ export default function News() {
                         ))}
                     </div>
 
+
                     {/* Link te faqja e dedikuar e lajmeve */}
-                    <div className="text-center" style={{ marginTop: 24 }}>
+                    <div className="text-center" style={{marginTop: 24}}>
                         <Link className="btn-one" href="/news">
                             <span className="txt">Shiko të gjitha lajmet</span>
                         </Link>

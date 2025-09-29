@@ -85,7 +85,7 @@ export default function Events() {
                                 <div className="events-style2__single-img">
                                     <div
                                         className="inner"
-                                        style={{width: 330, height: 300, overflow: "hidden"}}
+                                        style={{width: 330, height: 250, overflow: "hidden"}}
                                     >
                                         <img
                                             src={asAbs(ev.mainImageUrl) || "/assets/images/resources/events-v2-img1.jpg"}

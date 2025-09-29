@@ -50,9 +50,9 @@ export default function Footer1() {
                                     </div>
                                     <div className="footer-widget-links">
                                         <ul>
-                                            <li><Link href="#">Turizmi</Link></li>
-                                            <li><Link href="#">Eventet</Link></li>
-                                            <li><Link href="#">Lajmet</Link></li>
+                                            <li><Link href="/tourism">Turizmi</Link></li>
+                                            <li><Link href="/events">Eventet</Link></li>
+                                            <li><Link href="/news">Lajmet</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -68,9 +68,9 @@ export default function Footer1() {
                                     </div>
                                     <div className="footer-widget-links">
                                         <ul>
-                                            <li><Link href="#">Jep opinion</Link></li>
-                                            <li><Link href="#">Raporto</Link></li>
-                                            <li><Link href="#">Bej një kërkesë</Link></li>
+                                            <li><Link href="/surveys">Jep opinion</Link></li>
+                                            <li><Link href="/report">Raporto</Link></li>
+                                            <li><Link href="/contact">Kontakto</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -82,11 +82,11 @@ export default function Footer1() {
                             <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 wow animated fadeInUp" data-wow-delay="0.7s">
                                 <div className="single-footer-widget footer-widget--contact">
                                     <div className="title">
-                                        <h3>Contact</h3>
+                                        <h3>Kontakt</h3>
                                     </div>
                                     <div className="footer-widget--contact-info">
                                         <div className="footer-widget--contact-info-text">
-                                            <p>Tortor neque sed tellus est eget dui id ante tristique tristique dolor.</p>
+                                            <p>Na gjeni pranë bashkisë Klos, çdo ditë jave nga 08:00 - 16:00, ose nëpërmjet aplikacionit</p>
                                         </div>
                                         <ul>
                                             <li>
@@ -94,7 +94,7 @@ export default function Footer1() {
                                                     <span className="icon-pin"></span>
                                                 </div>
                                                 <div className="text">
-                                                    <p>New Hyde Park, NY 11040</p>
+                                                    <p>Bashkia Klos</p>
                                                 </div>
                                             </li>
 
@@ -103,7 +103,7 @@ export default function Footer1() {
                                                     <span className="icon-mail-1"></span>
                                                 </div>
                                                 <div className="text">
-                                                    <p><Link href="mailto:yourmail@email.com">example@govarnex.com</Link></p>
+                                                    <p><Link href="mailto:yourmail@email.com">info@klosismart.com</Link></p>
                                                 </div>
                                             </li>
 

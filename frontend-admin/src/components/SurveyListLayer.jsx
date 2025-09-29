@@ -34,9 +34,18 @@ const SurveyListLayer = () => {
 
     // Create table row HTML
     const createRowHtml = (survey) => {
-        const statusBadge = survey.status === "ACTIVE"
-            ? `<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm">Aktiv</span>`
-            : `<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium text-sm">Joaktiv</span>`;
+        const now = new Date();
+        const endDate = new Date(survey.endDate);
+
+        let statusBadge;
+
+        if (endDate < now) {
+            statusBadge = `<span class="bg-secondary-focus text-secondary-main px-24 py-4 rounded-pill fw-medium text-sm">Mbyllur</span>`;
+        } else if (survey.status === "ACTIVE") {
+            statusBadge = `<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm">Aktiv</span>`;
+        } else {
+            statusBadge = `<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium text-sm">Joaktiv</span>`;
+        }
 
         return [
             survey.id,
@@ -47,16 +56,34 @@ const SurveyListLayer = () => {
             formatDate(survey.endDate),
             statusBadge,
             `<div class="d-flex">
-                <a href="/survey-results/${survey.id}" class="w-32-px h-32-px me-8 bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
-                    <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
-                </a>
-                <a href="/survey-edit/${survey.id}" class="w-32-px h-32-px me-8 bg-success-focus text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
-                    <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                </a>
-                <button class="delete-btn w-32-px h-32-px me-8 bg-danger-focus text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center border-0" data-id="${survey.id}">
-                    <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3H9zM7 6h10v13H7V6zm2 2v9h2V8H9zm4 0v9h2V8h-2z"/></svg>
-                </button>
-            </div>`
+  <!-- Syri blu -->
+  <a href="/survey-results/${survey.id}" 
+     class="w-32-px h-32-px me-8 bg-primary-light text-primary rounded-circle d-inline-flex align-items-center justify-content-center" 
+     title="Shiko">
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/>
+    </svg>
+  </a>
+
+  <!-- Lapsi jeshil -->
+  <a href="/survey-edit/${survey.id}" 
+     class="w-32-px h-32-px me-8 bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center" 
+     title="Ndrysho">
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+    </svg>
+  </a>
+
+  <!-- Koshi i kuq -->
+  <button class="delete-btn w-32-px h-32-px me-8 bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center border-0" 
+          data-id="${survey.id}" 
+          title="Fshi">
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3H9zM7 6h10v13H7V6zm2 2v9h2V8H9zm4 0v9h2V8h-2z"/>
+    </svg>
+  </button>
+</div>
+`
         ];
     };
 
