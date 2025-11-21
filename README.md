@@ -46,25 +46,6 @@ The system uses clean layered architecture, is fully extensible, and integrates 
 
 ---
 
-## 🧰 Tech Stack
-
-**Frontend**
-- Next.js / React  
-- Leaflet  
-- ApexCharts  
-- DataTables  
-
-**Backend**
-- Spring Boot, Spring Security, JPA  
-- JavaMailSender  
-- OpenAI API (Structured Outputs + Chat)
-
-**Infrastructure**
-- Docker & Docker Compose  
-- MySQL
-
----
-
 ## 🧩 Core Modules (Summary)
 
 ### 📝 Surveys & AI
