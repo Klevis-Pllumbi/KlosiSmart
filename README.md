@@ -87,31 +87,31 @@ The system uses clean layered architecture, is fully extensible, and integrates 
 ## 📸 Screenshots
 
 #### Landing Page
-<img width="100%" height="auto" alt="Screenshot 2025-11-21 105310" src="https://github.com/user-attachments/assets/03e4f110-db27-46e1-a63e-28bb66d0e387" />
+<img width="100%" height="auto" alt="Landing Page" src="https://github.com/user-attachments/assets/03e4f110-db27-46e1-a63e-28bb66d0e387" />
 
 #### Creating Survey
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 125930" src="https://github.com/user-attachments/assets/96d7e2a1-0c93-48da-9afc-812b1ffddbd2" />
+<img width="100%" height="auto" alt="Creating Survey" src="https://github.com/user-attachments/assets/96d7e2a1-0c93-48da-9afc-812b1ffddbd2" />
 
 #### AI-generating
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 130129" src="https://github.com/user-attachments/assets/cbd6516b-af28-4b5f-8655-0f7e5493d181" />
+<img width="100%" height="auto" alt="AI-generating" src="https://github.com/user-attachments/assets/cbd6516b-af28-4b5f-8655-0f7e5493d181" />
 
 #### Survey Statictics
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 132412" src="https://github.com/user-attachments/assets/dd06e782-4162-417a-9331-3588d1833660" />
+<img width="100%" height="auto" alt="Survey Statictics" src="https://github.com/user-attachments/assets/dd06e782-4162-417a-9331-3588d1833660" />
 
 #### News & Event Presentation
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 131913" src="https://github.com/user-attachments/assets/22c485e8-5132-45f4-91a0-dfcea403ca55" />
+<img width="100%" height="auto" alt="News & Event Presentation" src="https://github.com/user-attachments/assets/22c485e8-5132-45f4-91a0-dfcea403ca55" />
 
 #### News & Event Admin Managment
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 132007" src="https://github.com/user-attachments/assets/d7c08669-26b2-4cd0-92ae-e5fd2512a25e" />
+<img width="100%" height="auto" alt="News & Event Admin Managment" src="https://github.com/user-attachments/assets/d7c08669-26b2-4cd0-92ae-e5fd2512a25e" />
 
 #### Report Form
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 132142" src="https://github.com/user-attachments/assets/ea68c494-5f89-4c8a-b062-2f4f9c8b7725" />
+<img width="100%" height="auto" alt="Report Form" src="https://github.com/user-attachments/assets/ea68c494-5f89-4c8a-b062-2f4f9c8b7725" />
 
 #### Report Dashboard
-<img width="100%" height="auto" alt="image" src="https://github.com/user-attachments/assets/ee95b8b6-0d9a-4ace-8a36-1ed2a723ad4e" />
+<img width="100%" height="auto" alt="Report Dashboard" src="https://github.com/user-attachments/assets/ee95b8b6-0d9a-4ace-8a36-1ed2a723ad4e" />
 
 #### Virtual Assistant
-<img width="100%" height="auto" alt="Screenshot 2025-09-18 131156" src="https://github.com/user-attachments/assets/f0ff268e-ade2-412e-aa4c-6fd042ceeb4f" />
+<img width="100%" height="auto" alt="Virtual Assistant" src="https://github.com/user-attachments/assets/f0ff268e-ade2-412e-aa4c-6fd042ceeb4f" />
 
 ---
 
