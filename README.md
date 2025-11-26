@@ -119,7 +119,7 @@ The system uses clean layered architecture, is fully extensible, and integrates 
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/<username>/<repo>.git
+git clone https://github.com/Klevis-Pllumbi/KlosiSmart.git
 cd <repo>
 ```
 
